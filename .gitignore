@@ -1,0 +1,14 @@
+# Large data files
+yc_companies_raw.json
+yc_companies_enriched.json
+deep_insights.json
+partner_deep.json
+
+# Old dashboard versions
+dashboard.html
+dashboard_v2.html
+
+# Python
+__pycache__/
+*.pyc
+.DS_Store
