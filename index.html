@@ -14,8 +14,11 @@ html{overflow-x:hidden}
 body{font-family:'Inter',system-ui,sans-serif;background:#f8f9fb;color:#1a1a2e;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden;width:100%;max-width:100%}
 
 /* Header */
-.header{background:#fff;border-bottom:1px solid #e8eaed;padding:48px 40px 44px;text-align:center;overflow:hidden}
+.header{background:#fff;border-bottom:1px solid #e8eaed;padding:48px 40px 44px;text-align:center;overflow:hidden;position:relative}
 .header-inner{max-width:1360px;margin:0 auto}
+.made-by{position:absolute;top:18px;right:24px;font-size:0.78rem;color:#6b7280;font-weight:500}
+.made-by a{color:#ff6600;text-decoration:none;font-weight:700}
+.made-by a:hover{text-decoration:underline}
 .header .eyebrow{font-size:0.75rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#ff6600;margin-bottom:10px}
 .header h1{font-size:2.2rem;font-weight:800;color:#1a1a2e;margin-bottom:6px}
 .header p{font-size:0.95rem;color:#6b7280;max-width:780px;margin:0 auto}
@@ -46,7 +49,8 @@ body{font-family:'Inter',system-ui,sans-serif;background:#f8f9fb;color:#1a1a2e;l
 @media(max-width:900px){.g2,.g3{grid-template-columns:1fr}}
 @media(max-width:640px){
   html,body{width:100%!important;max-width:100%!important;overflow-x:hidden!important}
-  .header{padding:24px 14px 20px}
+  .header{padding:32px 14px 20px}
+  .made-by{position:static;text-align:center;margin-bottom:8px;font-size:0.72rem}
   .header h1{font-size:1.4rem}
   .header p{font-size:0.82rem;padding:0 4px}
   .container{padding:14px 10px 40px;max-width:100%!important}
@@ -127,6 +131,7 @@ tr:hover td{background:#fff7f0}
 <body>
 
 <div class="header">
+  <div class="made-by">Made with &#10084;&#65039; by <a href="https://www.linkedin.com/in/krishnaa-goyal/" target="_blank">Krishna Goyal</a></div>
   <div class="header-inner">
     <div class="eyebrow">Y Combinator Batch Analysis</div>
     <h1>What YC Is Really Betting On?</h1>
