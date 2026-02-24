@@ -132,21 +132,29 @@ tr:hover td{background:#fff7f0}
 .nav-arrow-l{left:4px;opacity:0}
 .nav-arrow:hover{background:#e65c00}
 
-/* Sticky CTA Banner */
-.cta-banner{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:2px solid #ff6600;padding:14px 24px;display:flex;align-items:center;justify-content:center;gap:14px;z-index:1000;transform:translateY(100%);transition:transform 0.4s ease;box-shadow:0 -4px 20px rgba(0,0,0,0.1)}
-.cta-banner.show{transform:translateY(0)}
-.cta-banner.dismissed{transform:translateY(100%)!important}
-.cta-text{font-size:0.88rem;color:#374151;font-weight:500}
-.cta-text strong{color:#1a1a2e}
-.cta-btn{display:inline-flex;align-items:center;gap:6px;background:#0A66C2;color:#fff;padding:8px 18px;border-radius:8px;text-decoration:none;font-size:0.82rem;font-weight:700;transition:all 0.2s;white-space:nowrap}
-.cta-btn:hover{background:#094d92;transform:scale(1.03)}
-.cta-btn svg{width:16px;height:16px;fill:#fff}
-.cta-close{background:none;border:none;color:#9ca3af;font-size:20px;cursor:pointer;padding:4px 8px;line-height:1;transition:color 0.2s}
-.cta-close:hover{color:#374151}
+/* Sticky CTA Bar */
+.cta-bar{position:fixed;bottom:0;left:0;right:0;background:linear-gradient(135deg,#1a1a2e,#2d1b4e);padding:12px 24px;display:flex;align-items:center;justify-content:center;gap:16px;z-index:1000;transform:translateY(100%);transition:transform 0.4s ease;box-shadow:0 -4px 20px rgba(0,0,0,0.15)}
+.cta-bar.show{transform:translateY(0)}
+.cta-bar.dismissed{transform:translateY(100%)!important}
+.cta-bar-text{font-size:0.85rem;color:#e2e8f0;font-weight:500}
+.cta-bar-text strong{color:#ff6600}
+.cta-bar-btn{display:inline-block;background:#ff6600;color:#fff;padding:8px 20px;border-radius:8px;text-decoration:none;font-size:0.82rem;font-weight:700;transition:all 0.2s;white-space:nowrap}
+.cta-bar-btn:hover{background:#e65c00;transform:scale(1.03)}
+.cta-bar-close{background:none;border:none;color:#6b7280;font-size:20px;cursor:pointer;padding:4px 8px;line-height:1;transition:color 0.2s}
+.cta-bar-close:hover{color:#fff}
+
+/* Roast Popup Modal */
+.roast-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:2000;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
+.roast-overlay.show{display:flex}
+.roast-modal{background:linear-gradient(135deg,#1a1a2e 0%,#2d1b4e 100%);border-radius:16px;padding:36px 32px;max-width:520px;width:90%;text-align:center;position:relative;animation:popIn 0.3s ease}
+@keyframes popIn{from{opacity:0;transform:scale(0.9)}to{opacity:1;transform:scale(1)}}
+.roast-modal-close{position:absolute;top:12px;right:16px;background:none;border:none;color:#6b7280;font-size:24px;cursor:pointer;transition:color 0.2s}
+.roast-modal-close:hover{color:#fff}
 @media(max-width:640px){
-  .cta-banner{flex-wrap:wrap;gap:8px;padding:12px 14px}
-  .cta-text{font-size:0.78rem;text-align:center;width:100%}
-  .cta-btn{font-size:0.75rem;padding:7px 14px}
+  .cta-bar{flex-wrap:wrap;gap:8px;padding:10px 14px}
+  .cta-bar-text{font-size:0.75rem;text-align:center;width:100%}
+  .cta-bar-btn{font-size:0.75rem;padding:7px 14px}
+  .roast-modal{padding:28px 20px;width:94%}
 }
 </style>
 </head>
@@ -902,6 +910,25 @@ new Chart(document.getElementById('wrapperStackChart'),{type:'bar',data:{labels:
 })();
 </script>
 
+<!-- YC Roast CTA Section -->
+<div style="max-width:800px;margin:40px auto 0;padding:0 24px">
+  <div style="background:linear-gradient(135deg,#1a1a2e 0%,#2d1b4e 100%);border-radius:16px;padding:40px 36px;text-align:center;position:relative;overflow:hidden">
+    <div style="position:absolute;top:-20px;right:-20px;width:120px;height:120px;background:#ff6600;opacity:0.1;border-radius:50%"></div>
+    <div style="position:absolute;bottom:-30px;left:-30px;width:160px;height:160px;background:#ff6600;opacity:0.08;border-radius:50%"></div>
+    <p style="font-size:0.75rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#ff6600;margin-bottom:10px">New</p>
+    <h2 style="font-size:1.6rem;font-weight:800;color:#fff;margin-bottom:10px">Get Your YC Application Roasted</h2>
+    <p style="font-size:0.95rem;color:#a5b4c8;max-width:560px;margin:0 auto 24px;line-height:1.7">A personalized, data-backed analysis of your startup vs. 793 YC companies. Find out how your vertical, founder profile, and idea stack up against what YC actually funds.</p>
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px 24px;margin-bottom:24px;font-size:0.82rem;color:#cbd5e1">
+      <span>&#10003; Vertical crowding analysis</span>
+      <span>&#10003; Founder-market fit score</span>
+      <span>&#10003; Competitor mapping</span>
+      <span>&#10003; Actionable recommendations</span>
+    </div>
+    <a id="roastBtn" href="https://krishnaatmu.gumroad.com/l/jvsyuf" target="_blank" rel="noopener" style="display:inline-block;background:#ff6600;color:#fff;padding:14px 36px;border-radius:10px;text-decoration:none;font-size:1rem;font-weight:700;transition:all 0.2s;box-shadow:0 4px 15px rgba(255,102,0,0.35)" onmouseover="this.style.background='#e65c00';this.style.transform='translateY(-2px)';this.style.boxShadow='0 6px 20px rgba(255,102,0,0.45)'" onmouseout="this.style.background='#ff6600';this.style.transform='translateY(0)';this.style.boxShadow='0 4px 15px rgba(255,102,0,0.35)'">Get Your Roast — $149</a>
+    <p style="font-size:0.75rem;color:#6b7280;margin-top:14px">Personalized PDF report delivered within 48 hours</p>
+  </div>
+</div>
+
 <footer style="max-width:1360px;margin:0 auto;padding:30px 24px 50px;border-top:1px solid #e8eaed;font-size:0.78rem;color:#9ca3af;line-height:1.7">
   <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px">
     <div style="max-width:520px">
@@ -918,41 +945,67 @@ new Chart(document.getElementById('wrapperStackChart'),{type:'bar',data:{labels:
   <p style="margin-top:24px;text-align:center;font-size:0.85rem;color:#6b7280">Built by <a href="https://www.linkedin.com/in/krishnaa-goyal/" target="_blank" rel="noopener" style="color:#fff;background:#ff6600;padding:4px 14px;border-radius:20px;text-decoration:none;font-weight:700;font-size:0.82rem;margin:0 4px;display:inline-block;box-shadow:0 2px 8px rgba(255,102,0,0.25);transition:all 0.2s" onmouseover="this.style.background='#e65c00';this.style.transform='scale(1.05)'" onmouseout="this.style.background='#ff6600';this.style.transform='scale(1)'">Krishna Goyal</a> · February 2026</p>
 </footer>
 
-<div class="cta-banner" id="ctaBanner">
-  <span class="cta-text"><strong>Enjoyed this?</strong> I'm building more deep dives on top VCs. Let's connect.</span>
-  <a class="cta-btn" href="https://www.linkedin.com/in/krishnaa-goyal/" target="_blank" rel="noopener">
-    <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-    Connect on LinkedIn
-  </a>
-  <a class="cta-btn" href="https://www.linkedin.com/in/krishnaa-goyal/" target="_blank" rel="noopener" style="background:#ff6600">
-    Message Me
-  </a>
-  <button class="cta-close" id="ctaClose" title="Dismiss">&times;</button>
+<!-- Sticky Bottom Bar -->
+<div class="cta-bar" id="ctaBar">
+  <span class="cta-bar-text"><strong>Applying to YC?</strong> Get a data-backed roast of your application.</span>
+  <a class="cta-bar-btn" href="https://krishnaatmu.gumroad.com/l/jvsyuf" target="_blank" rel="noopener">Get Your Roast — $149</a>
+  <button class="cta-bar-close" id="ctaBarClose" title="Dismiss">&times;</button>
+</div>
+
+<!-- Roast Popup Modal -->
+<div class="roast-overlay" id="roastOverlay">
+  <div class="roast-modal">
+    <button class="roast-modal-close" id="roastModalClose">&times;</button>
+    <p style="font-size:0.72rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#ff6600;margin-bottom:10px">New</p>
+    <h2 style="font-size:1.4rem;font-weight:800;color:#fff;margin-bottom:10px">Get Your YC Application Roasted</h2>
+    <p style="font-size:0.88rem;color:#a5b4c8;line-height:1.7;margin-bottom:20px">A personalized, data-backed analysis of your startup vs. 793 YC companies. Find out where you stand before you apply.</p>
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px 20px;margin-bottom:22px;font-size:0.78rem;color:#cbd5e1">
+      <span>&#10003; Vertical crowding</span>
+      <span>&#10003; Founder-market fit</span>
+      <span>&#10003; Competitor map</span>
+      <span>&#10003; Recommendations</span>
+    </div>
+    <a href="https://krishnaatmu.gumroad.com/l/jvsyuf" target="_blank" rel="noopener" style="display:inline-block;background:#ff6600;color:#fff;padding:12px 32px;border-radius:10px;text-decoration:none;font-size:0.95rem;font-weight:700;transition:all 0.2s;box-shadow:0 4px 15px rgba(255,102,0,0.35)" onmouseover="this.style.background='#e65c00'" onmouseout="this.style.background='#ff6600'">Get Your Roast — $149</a>
+    <p style="font-size:0.72rem;color:#6b7280;margin-top:12px">PDF report delivered within 48 hours</p>
+  </div>
 </div>
 
 <script>
 (function(){
-  var banner=document.getElementById('ctaBanner');
-  var closeBtn=document.getElementById('ctaClose');
-  if(sessionStorage.getItem('cta_dismissed')) return;
-  var shown=false;
-  var pageStart=Date.now();
-  function showBanner(){
-    if(shown) return;
-    shown=true;
-    banner.classList.add('show');
+  // Sticky bar — always visible on load
+  var bar=document.getElementById('ctaBar');
+  var barClose=document.getElementById('ctaBarClose');
+  var barDismissed=sessionStorage.getItem('cta_bar_dismissed');
+  if(!barDismissed){
+    bar.classList.add('show');
   }
-  // Show after 3 seconds on the page
-  setTimeout(showBanner,3000);
-  // Also show if they scroll past 40% (whichever comes first)
-  window.addEventListener('scroll',function(){
-    var scrollPct=window.scrollY/(document.documentElement.scrollHeight-window.innerHeight);
-    if(scrollPct>0.2) showBanner();
+  barClose.addEventListener('click',function(){
+    bar.classList.remove('show');
+    bar.classList.add('dismissed');
+    sessionStorage.setItem('cta_bar_dismissed','1');
   });
-  closeBtn.addEventListener('click',function(){
-    banner.classList.remove('show');
-    banner.classList.add('dismissed');
-    sessionStorage.setItem('cta_dismissed','1');
+
+  // Popup modal logic — shows once at 40% scroll
+  var overlay=document.getElementById('roastOverlay');
+  var modalClose=document.getElementById('roastModalClose');
+  var popupDismissed=sessionStorage.getItem('roast_popup_dismissed');
+  var popupShown=false;
+  if(!popupDismissed){
+    window.addEventListener('scroll',function(){
+      var pct=window.scrollY/(document.documentElement.scrollHeight-window.innerHeight);
+      if(pct>0.3&&!popupShown){
+        popupShown=true;
+        overlay.classList.add('show');
+      }
+    });
+  }
+  function closePopup(){
+    overlay.classList.remove('show');
+    sessionStorage.setItem('roast_popup_dismissed','1');
+  }
+  modalClose.addEventListener('click',closePopup);
+  overlay.addEventListener('click',function(e){
+    if(e.target===overlay) closePopup();
   });
 })();
 </script>
