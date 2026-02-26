@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cisco Spaces — State of Adoption</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{overflow-x:hidden}
+body{font-family:'Inter',system-ui,sans-serif;background:#f8f9fb;color:#1a1a2e;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden;width:100%;max-width:100%}
+
+.header{background:#fff;border-bottom:1px solid #e8eaed;padding:48px 40px 44px;text-align:center;overflow:hidden;position:relative}
+.header-inner{max-width:1360px;margin:0 auto}
+.header .eyebrow{font-size:0.75rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#049fd9;margin-bottom:10px}
+.header h1{font-size:2.2rem;font-weight:800;color:#1a1a2e;margin-bottom:6px}
+.header p{font-size:0.95rem;color:#6b7280;max-width:780px;margin:0 auto}
+
+.container{max-width:1360px;margin:0 auto;padding:28px 24px 60px;overflow-x:hidden;width:100%}
+
+.kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:12px;margin-bottom:28px}
+.kpi{background:#fff;border:1px solid #e8eaed;border-radius:10px;padding:18px 16px;text-align:center}
+.kpi .n{font-size:1.7rem;font-weight:800;color:#049fd9}
+.kpi .n.warn{color:#dc2626}
+.kpi .n.good{color:#059669}
+.kpi .l{font-size:0.72rem;font-weight:600;color:#9ca3af;margin-top:2px;text-transform:uppercase;letter-spacing:0.5px}
+.kpi .sub{font-size:0.7rem;color:#9ca3af;margin-top:1px}
+
+.section{margin-bottom:36px;overflow-x:hidden;max-width:100%}
+.section-title{font-size:1.25rem;font-weight:700;color:#1a1a2e;margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.section-title .badge{background:#049fd9;color:#fff;font-size:0.65rem;font-weight:800;padding:3px 9px;border-radius:5px;letter-spacing:0.5px}
+
+.card{background:#fff;border:1px solid #e8eaed;border-radius:12px;padding:22px;margin-bottom:14px;box-shadow:0 1px 3px rgba(0,0,0,0.04);overflow:hidden;min-width:0}
+.card h3{font-size:0.95rem;font-weight:700;color:#374151;margin-bottom:14px}
+.card .card-sub{font-size:0.82rem;color:#6b7280;margin-bottom:12px}
+.card canvas{max-height:400px}
+
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:16px;min-width:0;max-width:100%}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;min-width:0;max-width:100%}
+.g2>*,.g3>*{min-width:0;overflow:hidden}
+@media(max-width:900px){.g2,.g3{grid-template-columns:1fr}}
+@media(max-width:640px){
+  html,body{width:100%!important;max-width:100%!important;overflow-x:hidden!important}
+  .header{padding:32px 14px 20px}
+  .header h1{font-size:1.4rem}
+  .header p{font-size:0.82rem;padding:0 4px}
+  .container{padding:14px 10px 40px;max-width:100%!important}
+  .kpi-row{grid-template-columns:repeat(3,1fr)!important;gap:6px}
+  .kpi{padding:10px 6px}
+  .kpi .n{font-size:1.2rem}
+  .kpi .l{font-size:0.6rem;letter-spacing:0}
+  .section-title{font-size:1rem;flex-wrap:wrap}
+  .card{padding:12px;border-radius:10px;max-width:100%!important}
+  .card h3{font-size:0.85rem}
+  .card canvas{max-height:260px}
+  .insight{padding:12px;max-width:100%!important}
+  .insight li{font-size:0.82rem;word-break:break-word}
+  .nav{padding:8px 10px;gap:5px}
+  .nav a{padding:5px 10px;font-size:0.68rem}
+  .nav-arrow{width:22px;height:22px;font-size:11px}
+  .nav-fade-r,.nav-fade-l{width:32px}
+  table{font-size:0.75rem}
+  th,td{padding:5px 6px;word-break:break-word}
+  .tbl-wrap{max-height:300px;-webkit-overflow-scrolling:touch;max-width:100%!important}
+  .g2,.g3{gap:8px;max-width:100%!important}
+  p,li,td,th,span{max-width:100%;overflow-wrap:break-word;word-wrap:break-word}
+}
+
+.insight{background:#f0f9ff;border:1px solid #bae6fd;border-radius:12px;padding:22px;margin-bottom:14px;overflow:hidden;min-width:0}
+.insight h3{font-size:0.95rem;font-weight:700;color:#0369a1;margin-bottom:10px}
+.insight ul{list-style:none;padding:0}
+.insight li{padding:5px 0;border-bottom:1px solid #e0f2fe;font-size:0.9rem;color:#4b5563}
+.insight li:last-child{border-bottom:none}
+.hl{color:#049fd9;font-weight:700}
+.pos{color:#059669;font-weight:600}
+.neg{color:#dc2626;font-weight:600}
+.muted{color:#9ca3af;font-weight:500}
+
+.insight-warn{background:#fef2f2;border:1px solid #fecaca;border-radius:12px;padding:22px;margin-bottom:14px}
+.insight-warn h3{font-size:0.95rem;font-weight:700;color:#dc2626;margin-bottom:10px}
+.insight-warn ul{list-style:none;padding:0}
+.insight-warn li{padding:5px 0;border-bottom:1px solid #fee2e2;font-size:0.9rem;color:#4b5563}
+.insight-warn li:last-child{border-bottom:none}
+
+.tbl-wrap{overflow-x:auto;max-height:420px;overflow-y:auto;max-width:100%}
+table{max-width:100%;width:100%;border-collapse:collapse;font-size:0.85rem}
+th{background:#f3f4f6;color:#0369a1;padding:9px 12px;text-align:left;font-weight:700;position:sticky;top:0;z-index:1}
+td{padding:8px 12px;border-bottom:1px solid #f0f0f0;color:#4b5563}
+tr:hover td{background:#f0f9ff}
+
+.pill{display:inline-block;padding:2px 9px;border-radius:10px;font-size:0.7rem;font-weight:700}
+.pill-up{background:#d1fae5;color:#065f46}
+.pill-down{background:#fee2e2;color:#991b1b}
+.pill-flat{background:#f3f4f6;color:#6b7280}
+.pill-tag{background:#e0f2fe;color:#0369a1;margin:1px}
+.pill-warn{background:#fee2e2;color:#991b1b}
+.pill-good{background:#d1fae5;color:#065f46}
+
+.quote{border-left:3px solid #049fd9;padding:14px 18px;margin:14px 0;background:#f0f9ff;border-radius:0 10px 10px 0;font-size:0.92rem;color:#374151;word-wrap:break-word;overflow-wrap:break-word}
+
+.nav-outer{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid #e8eaed;overflow:hidden;width:100%}
+.nav-wrap{position:relative;max-width:1360px;margin:0 auto;overflow:hidden}
+.nav{padding:10px 24px;overflow-x:auto;white-space:nowrap;display:flex;gap:6px;scrollbar-width:none;-ms-overflow-style:none;scroll-behavior:smooth}
+.nav::-webkit-scrollbar{display:none}
+.nav a{display:inline-flex;align-items:center;padding:7px 14px;font-size:0.76rem;font-weight:600;color:#6b7280;text-decoration:none;border-radius:20px;border:1.5px solid #e5e7eb;transition:all 0.2s;cursor:pointer;flex-shrink:0;background:#fff}
+.nav a:hover{border-color:#049fd9;color:#049fd9;background:#f0f9ff}
+.nav a.active{border-color:#049fd9;color:#fff;background:#049fd9;box-shadow:0 2px 8px rgba(4,159,217,0.25)}
+.nav-fade-r,.nav-fade-l{position:absolute;top:0;bottom:0;width:48px;pointer-events:none;z-index:2}
+.nav-fade-r{right:0;background:linear-gradient(to right,transparent,#fff 80%)}
+.nav-fade-l{left:0;background:linear-gradient(to left,transparent,#fff 80%);opacity:0}
+.nav-arrow{position:absolute;top:50%;transform:translateY(-50%);width:28px;height:28px;border-radius:50%;background:#049fd9;color:#fff;border:none;font-size:14px;cursor:pointer;z-index:3;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(0,0,0,0.15);transition:opacity 0.2s}
+.nav-arrow-r{right:4px}
+.nav-arrow-l{left:4px;opacity:0}
+.nav-arrow:hover{background:#0284c7}
+
+.footer{max-width:1360px;margin:0 auto;padding:30px 24px 50px;border-top:1px solid #e8eaed;font-size:0.75rem;color:#9ca3af;text-align:center}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="eyebrow">Cisco Spaces · State of Adoption · Internal</div>
+    <h1>Where Does Adoption Actually Stand?</h1>
+    <p>20,462 accounts. 7,270 onboarded. 1,584 with any feature usage. Engagement scoring, churn risk modeling, infrastructure correlations, sensor pipeline analysis, partner ecosystem mapping, and stall point identification.</p>
+  </div>
+</div>
+
+<div class="nav-outer">
+  <div class="nav-wrap">
+    <div class="nav-fade-l" id="navFadeL"></div>
+    <button class="nav-arrow nav-arrow-l" id="navL" onclick="document.getElementById('navScroll').scrollBy({left:-200,behavior:'smooth'})">&#8249;</button>
+    <nav class="nav" id="navScroll">
+      <a href="#overview" data-sec="overview">Overview</a>
+      <a href="#funnel" data-sec="funnel">Adoption Funnel</a>
+      <a href="#infra" data-sec="infra">Infrastructure Effect</a>
+      <a href="#correlations" data-sec="correlations">Correlations</a>
+      <a href="#features" data-sec="features">Feature Adoption</a>
+      <a href="#advantage" data-sec="advantage">Advantage Deep Dive</a>
+      <a href="#churn" data-sec="churn">Churn Risk</a>
+      <a href="#sensors" data-sec="sensors">Sensor Pipeline</a>
+      <a href="#signage" data-sec="signage">Signage & Wayfinding</a>
+      <a href="#partners" data-sec="partners">Partner Ecosystem</a>
+      <a href="#stall" data-sec="stall">Stall Points</a>
+      <a href="#regions" data-sec="regions">Regions</a>
+      <a href="#verticals" data-sec="verticals">Verticals</a>
+      <a href="#showcase" data-sec="showcase">Showcase</a>
+      <a href="#gaps" data-sec="gaps">Data Gaps</a>
+    </nav>
+    <div class="nav-fade-r" id="navFadeR"></div>
+    <button class="nav-arrow nav-arrow-r" id="navR" onclick="document.getElementById('navScroll').scrollBy({left:200,behavior:'smooth'})">&#8250;</button>
+  </div>
+</div>
+
+<div class="container" id="app"></div>
+
+<div class="footer">Cisco Spaces Adoption Analysis · Prepared for Team Offsite · Internal Use Only</div>
+
+<script>
+const D = {"kpis": {"total": 20462, "onboarded": 7270, "onboarded_pct": 35.5, "loc_active": 5445, "loc_active_pct": 74.9, "any_feature": 1584, "any_feature_pct": 21.8, "deep": 169, "deep_pct": 2.3, "power_users": 34, "avg_engagement": 9.9, "median_engagement": 8.0, "partner_accounts": 262, "with_sensors": 214}, "tiers": {"See": {"total": 12, "onboarded": 0, "onboarded_pct": 0.0, "any_feature": 0, "any_feature_pct": 0, "loc_active_pct": 0, "deep_pct": 0, "avg_engagement": 0, "paid_pct": 25.0}, "Essentials": {"total": 11263, "onboarded": 3773, "onboarded_pct": 33.5, "any_feature": 568, "any_feature_pct": 15.1, "loc_active_pct": 73.0, "deep_pct": 0.8, "avg_engagement": 7.9, "paid_pct": 11.4}, "Advantage": {"total": 3564, "onboarded": 1924, "onboarded_pct": 54.0, "any_feature": 828, "any_feature_pct": 43.0, "loc_active_pct": 71.7, "deep_pct": 6.3, "avg_engagement": 15.5, "paid_pct": 41.2}, "Premier": {"total": 74, "onboarded": 53, "onboarded_pct": 71.6, "any_feature": 41, "any_feature_pct": 77.4, "loc_active_pct": 96.2, "deep_pct": 24.5, "avg_engagement": 26.7, "paid_pct": 95.9}, "Unknown": {"total": 5549, "onboarded": 1520, "onboarded_pct": 27.4, "any_feature": 147, "any_feature_pct": 9.7, "loc_active_pct": 82.8, "deep_pct": 0.3, "avg_engagement": 7.4, "paid_pct": 7.1}}, "funnel": {"Onboarded Only": 1618, "Maps Only": 8, "Location Active": 4026, "Location + Maps": 34, "Feature Active": 1274, "Multi-Feature": 170, "Deep Adoption": 106, "Power User": 34}, "funnel_tier": {"Essentials": {"Onboarded Only": 950, "Maps Only": 0, "Location Active": 2250, "Location + Maps": 5, "Feature Active": 505, "Multi-Feature": 37, "Deep Adoption": 23, "Power User": 3}, "Advantage": {"Onboarded Only": 427, "Maps Only": 8, "Location Active": 633, "Location + Maps": 28, "Feature Active": 615, "Multi-Feature": 115, "Deep Adoption": 73, "Power User": 25}, "Premier": {"Onboarded Only": 2, "Maps Only": 0, "Location Active": 10, "Location + Maps": 0, "Feature Active": 18, "Multi-Feature": 12, "Deep Adoption": 7, "Power User": 4}}, "features": {"Dashboard Login": {"count": 1752, "pct_total": 8.6, "pct_onb": 24.1}, "Open Roaming": {"count": 19, "pct_total": 0.1, "pct_onb": 0.3}, "Captive Portal": {"count": 50, "pct_total": 0.2, "pct_onb": 0.7}, "Detect & Locate API": {"count": 179, "pct_total": 0.9, "pct_onb": 2.5}, "Firehose API": {"count": 179, "pct_total": 0.9, "pct_onb": 2.5}, "SFTP Export": {"count": 94, "pct_total": 0.5, "pct_onb": 1.3}, "Signage App": {"count": 107, "pct_total": 0.5, "pct_onb": 1.5}, "Space Explorer": {"count": 5, "pct_total": 0.0, "pct_onb": 0.1}, "Partner Apps": {"count": 234, "pct_total": 1.1, "pct_onb": 3.2}, "AI Maps": {"count": 323, "pct_total": 1.6, "pct_onb": 4.4}, "IoT Explorer": {"count": 65, "pct_total": 0.3, "pct_onb": 0.9}, "IoT Wired": {"count": 30, "pct_total": 0.1, "pct_onb": 0.4}}, "feature_depth": {"0": 5686, "1": 1265, "2": 150, "3": 91, "4": 42, "5": 23, "6": 9, "7": 3, "8": 1}, "features_tier": {"Essentials": {"Dashboard Login": 13.3, "Open Roaming": 0.1, "Captive Portal": 0.1, "Detect & Locate API": 1.0, "Firehose API": 0.8, "SFTP Export": 0.2, "Signage App": 0.1, "Space Explorer": 0.0, "Partner Apps": 1.4, "AI Maps": 0.7, "IoT Explorer": 0.0, "IoT Wired": 0.2}, "Advantage": {"Dashboard Login": 35.9, "Open Roaming": 0.3, "Captive Portal": 1.8, "Detect & Locate API": 5.2, "Firehose API": 5.5, "SFTP Export": 3.2, "Signage App": 2.1, "Space Explorer": 0.0, "Partner Apps": 5.9, "AI Maps": 5.8, "IoT Explorer": 0.1, "IoT Wired": 0.2}, "Premier": {"Dashboard Login": 67.9, "Open Roaming": 3.8, "Captive Portal": 3.8, "Detect & Locate API": 7.5, "Firehose API": 13.2, "SFTP Export": 5.7, "Signage App": 24.5, "Space Explorer": 0.0, "Partner Apps": 9.4, "AI Maps": 39.6, "IoT Explorer": 0.0, "IoT Wired": 0.0}}, "cooccurrence": {"Dashboard Login + AI Maps": 159, "Firehose API + Partner Apps": 134, "Dashboard Login + Partner Apps": 121, "Dashboard Login + Firehose API": 106, "Signage App + AI Maps": 103, "Dashboard Login + Detect & Locate API": 92, "Detect & Locate API + Firehose API": 73, "Detect & Locate API + Partner Apps": 73, "Partner Apps + AI Maps": 69, "Firehose API + AI Maps": 61, "Dashboard Login + Signage App": 58, "Detect & Locate API + AI Maps": 49, "Dashboard Login + SFTP Export": 45, "AI Maps + IoT Explorer": 34, "Signage App + Partner Apps": 30}, "correlations": [{"pair": "middleware count \u00d7 feature count", "r": 0.81, "target": "feature_count"}, {"pair": "outcomes count \u00d7 feature count", "r": 0.68, "target": "feature_count"}, {"pair": "connector \u00d7 engagement", "r": 0.65, "target": "engagement"}, {"pair": "maps configured \u00d7 engagement", "r": 0.61, "target": "engagement"}, {"pair": "sensors \u00d7 engagement", "r": 0.6, "target": "engagement"}, {"pair": "partner \u00d7 engagement", "r": 0.59, "target": "engagement"}, {"pair": "advanced gw \u00d7 engagement", "r": 0.58, "target": "engagement"}, {"pair": "api keys \u00d7 engagement", "r": 0.57, "target": "engagement"}, {"pair": "middleware count \u00d7 engagement", "r": 0.53, "target": "engagement"}, {"pair": "loc active \u00d7 engagement", "r": 0.5, "target": "engagement"}, {"pair": "outcomes count \u00d7 engagement", "r": 0.44, "target": "engagement"}, {"pair": "signage \u00d7 engagement", "r": 0.41, "target": "engagement"}, {"pair": "connector \u00d7 feature count", "r": 0.39, "target": "feature_count"}, {"pair": "api keys \u00d7 feature count", "r": 0.37, "target": "feature_count"}, {"pair": "partner \u00d7 feature count", "r": 0.36, "target": "feature_count"}, {"pair": "transmit \u00d7 engagement", "r": 0.36, "target": "engagement"}, {"pair": "signage \u00d7 feature count", "r": 0.35, "target": "feature_count"}, {"pair": "advanced gw \u00d7 feature count", "r": 0.35, "target": "feature_count"}, {"pair": "maps configured \u00d7 feature count", "r": 0.33, "target": "feature_count"}, {"pair": "sensors \u00d7 feature count", "r": 0.33, "target": "feature_count"}], "maps_impact": {"with": {"n": 211, "avg_feat": 1.67, "avg_eng": 42.7, "any_feat_pct": 80.1}, "without": {"n": 7059, "avg_feat": 0.26, "avg_eng": 8.9, "any_feat_pct": 20.0}}, "sensors_impact": {"with": {"n": 182, "avg_feat": 1.78, "avg_eng": 44.6, "any_feat_pct": 80.8}, "without": {"n": 7088, "avg_feat": 0.27, "avg_eng": 9.0, "any_feat_pct": 20.3}}, "connector_impact": {"with": {"n": 1670, "avg_feat": 0.81, "avg_eng": 20.9, "any_feat_pct": 52.8}, "without": {"n": 5600, "avg_feat": 0.15, "avg_eng": 6.6, "any_feat_pct": 12.6}}, "adv_gw_impact": {"with": {"n": 163, "avg_feat": 1.96, "avg_eng": 45.5, "any_feat_pct": 83.4}, "without": {"n": 7107, "avg_feat": 0.27, "avg_eng": 9.1, "any_feat_pct": 20.4}}, "ap_density": {"(0.999, 33.0]": {"n": 789, "avg_feat": 0.32, "avg_eng": 11.2, "any_feat_pct": 20.2}, "(33.0, 217.0]": {"n": 786, "avg_feat": 0.37, "avg_eng": 12.8, "any_feat_pct": 24.9}, "(217.0, 941.0]": {"n": 790, "avg_feat": 0.57, "avg_eng": 16.3, "any_feat_pct": 40.0}, "(941.0, 275826.0]": {"n": 784, "avg_feat": 0.96, "avg_eng": 22.0, "any_feat_pct": 61.0}}, "sensor_pipeline": {"accounts_with_discovery": 165, "total_discovered": 3687019, "total_claimed": 174057, "total_configured": 75416, "total_sending": 114, "discover_to_claim_pct": 4.7, "claim_to_config_pct": 43.3, "avg_discovered": 22345.6, "avg_claimed": 1054.9}, "signage": {"total": 380, "avg_devices": 5.6, "avg_clicks": 143.2, "avg_events": 5.7, "with_webex": 307, "with_rich_map": 380, "avg_webex_devices": 171.9, "top_events": {"room_finder": 2164, "floor_select": 27848, "where_am_i": 1524}}, "partners": {"total": 262, "categories": {"Healthcare RTLS": 91, "Kio Cloud (Wayfinding)": 90, "Indoor Mapping": 36, "Other": 13, "Test/Dev": 8, "Environmental": 7, "Smart Building": 6, "Asset Management": 5, "Workplace": 4, "Airport Solutions": 2}, "top_apps": {"STANLEY Healthcare RTLS": 60, "Kio Cloud": 49, "Kio Cloud UK": 31, "MazeMap": 28, "CenTrak - Locating and Sensing Services": 21, "Kio Cloud EU": 9, "MapsIndoors": 5, "Appspace for Cisco Spaces": 4, "Sonitor Sense On-Prem": 4, "HibouAir Lite": 3, "Asimily": 3, "PlaceOS On-Prem": 3, "Live Monitoring": 2, "Bluzone for Healthcare RTLS": 2, "BORDA ASSET MANAGEMENT (CMMS & RTLS)": 2}, "by_category": {"Kio Cloud (Wayfinding)": {"n": 90, "avg_feat": 2.17, "avg_eng": 45.8}, "Smart Building": {"n": 6, "avg_feat": 2.33, "avg_eng": 41.3}, "Environmental": {"n": 7, "avg_feat": 2.71, "avg_eng": 49.1}, "Indoor Mapping": {"n": 36, "avg_feat": 1.72, "avg_eng": 38.4}, "Healthcare RTLS": {"n": 91, "avg_feat": 1.15, "avg_eng": 34.3}, "Workplace": {"n": 4, "avg_feat": 1.25, "avg_eng": 24.5}, "Test/Dev": {"n": 8, "avg_feat": 1.5, "avg_eng": 28.1}, "Asset Management": {"n": 5, "avg_feat": 2.8, "avg_eng": 38.2}, "Other": {"n": 13, "avg_feat": 2.15, "avg_eng": 38.5}, "Airport Solutions": {"n": 2, "avg_feat": 4.5, "avg_eng": 62.0}}, "firehose_apps": 25}, "use_cases": {"total_accounts": 297, "avg_per_account": 4.0, "asset_tracking": 203, "temperature": 138, "presence": 99, "with_rules": 105, "avg_rules": 1.2}, "stall_points": {"Network Onboarded": {"n": 6419, "any_feature_pct": 20.5, "loc_active_pct": 77.8, "avg_engagement": 9.6, "maps_pct": 2.3}, "Report Started": {"n": 1, "any_feature_pct": 0.0, "loc_active_pct": 100.0, "avg_engagement": 14.0, "maps_pct": 0.0}, "Setup Complete - Business units defined": {"n": 546, "any_feature_pct": 33.7, "loc_active_pct": 53.5, "avg_engagement": 13.3, "maps_pct": 8.4}, "Setup Complete - Full Metadata Updated": {"n": 23, "any_feature_pct": 47.8, "loc_active_pct": 60.9, "avg_engagement": 15.2, "maps_pct": 0.0}, "Setup Complete - Sq. ft. Updated": {"n": 9, "any_feature_pct": 66.7, "loc_active_pct": 55.6, "avg_engagement": 24.8, "maps_pct": 22.2}, "Setup Complete - Timezone Updated": {"n": 272, "any_feature_pct": 25.7, "loc_active_pct": 51.1, "avg_engagement": 10.9, "maps_pct": 5.1}}, "regions": {"Americas": {"total": 8119, "onboarded": 3539, "onboarded_pct": 43.6, "any_feature_pct": 19.7, "loc_active_pct": 75.8, "avg_engagement": 9.8, "avg_features": 0.2, "tier_mix": {"Essentials": 5219, "Advantage": 1753, "Unknown": 1113, "Premier": 31, "See": 3}}, "EMEAR": {"total": 6473, "onboarded": 2403, "onboarded_pct": 37.1, "any_feature_pct": 28.8, "loc_active_pct": 73.6, "avg_engagement": 10.9, "avg_features": 0.53, "tier_mix": {"Essentials": 4284, "Advantage": 1309, "Unknown": 841, "Premier": 33, "See": 6}}, "APJC": {"total": 2332, "onboarded": 551, "onboarded_pct": 23.6, "any_feature_pct": 20.9, "loc_active_pct": 55.2, "avg_engagement": 10.1, "avg_features": 0.24, "tier_mix": {"Essentials": 1490, "Advantage": 468, "Unknown": 362, "Premier": 9, "See": 3}}}, "verticals": {"Generic": {"total": 1555, "onboarded": 1224, "any_feature": 272, "any_feature_pct": 22.2, "avg_features": 0.36, "avg_engagement": 12.6, "deep_pct": 3.6, "loc_active_pct": 95.0, "has_partner_pct": 3.9}, "Workspaces": {"total": 777, "onboarded": 671, "any_feature": 329, "any_feature_pct": 49.0, "avg_features": 0.76, "avg_engagement": 18.5, "deep_pct": 7.9, "loc_active_pct": 88.7, "has_partner_pct": 7.6}, "Healthcare": {"total": 361, "onboarded": 348, "any_feature": 211, "any_feature_pct": 60.6, "avg_features": 0.87, "avg_engagement": 21.7, "deep_pct": 7.5, "loc_active_pct": 97.1, "has_partner_pct": 24.4}, "Education": {"total": 316, "onboarded": 299, "any_feature": 125, "any_feature_pct": 41.8, "avg_features": 0.62, "avg_engagement": 18.2, "deep_pct": 5.0, "loc_active_pct": 93.6, "has_partner_pct": 9.2}, "Retail": {"total": 155, "onboarded": 115, "any_feature": 50, "any_feature_pct": 43.5, "avg_features": 0.65, "avg_engagement": 16.0, "deep_pct": 6.1, "loc_active_pct": 81.7, "has_partner_pct": 0.6}, "Manufacturing": {"total": 96, "onboarded": 91, "any_feature": 27, "any_feature_pct": 29.7, "avg_features": 0.4, "avg_engagement": 13.3, "deep_pct": 3.3, "loc_active_pct": 87.9, "has_partner_pct": 2.1}, "Government": {"total": 88, "onboarded": 80, "any_feature": 25, "any_feature_pct": 31.2, "avg_features": 0.39, "avg_engagement": 13.8, "deep_pct": 2.5, "loc_active_pct": 97.5, "has_partner_pct": 0.0}, "Technology": {"total": 66, "onboarded": 56, "any_feature": 26, "any_feature_pct": 46.4, "avg_features": 0.68, "avg_engagement": 15.5, "deep_pct": 5.4, "loc_active_pct": 91.1, "has_partner_pct": 1.5}, "Banking & Financial Services": {"total": 64, "onboarded": 57, "any_feature": 15, "any_feature_pct": 26.3, "avg_features": 0.35, "avg_engagement": 12.4, "deep_pct": 3.5, "loc_active_pct": 91.2, "has_partner_pct": 0.0}, "Hospitality": {"total": 40, "onboarded": 35, "any_feature": 16, "any_feature_pct": 45.7, "avg_features": 0.69, "avg_engagement": 16.7, "deep_pct": 8.6, "loc_active_pct": 94.3, "has_partner_pct": 2.5}, "Venue": {"total": 6, "onboarded": 5, "any_feature": 3, "any_feature_pct": 60.0, "avg_features": 1.6, "avg_engagement": 21.6, "deep_pct": 20.0, "loc_active_pct": 60.0, "has_partner_pct": 0.0}}, "vert_heatmap": {"Generic": {"Dashboard Login": 17.8, "Open Roaming": 0.3, "Captive Portal": 1.5, "Detect & Locate API": 2.5, "Firehose API": 3.5, "SFTP Export": 2.0, "Signage App": 1.6, "Space Explorer": 0.0, "Partner Apps": 3.3, "AI Maps": 3.2, "IoT Explorer": 0.1, "IoT Wired": 0.2}, "Workspaces": {"Dashboard Login": 41.6, "Open Roaming": 0.1, "Captive Portal": 0.7, "Detect & Locate API": 6.1, "Firehose API": 5.4, "SFTP Export": 2.1, "Signage App": 3.9, "Space Explorer": 0.0, "Partner Apps": 6.3, "AI Maps": 9.8, "IoT Explorer": 0.0, "IoT Wired": 0.4}, "Healthcare": {"Dashboard Login": 55.5, "Open Roaming": 0.0, "Captive Portal": 0.0, "Detect & Locate API": 4.6, "Firehose API": 9.5, "SFTP Export": 0.6, "Signage App": 0.6, "Space Explorer": 0.0, "Partner Apps": 13.2, "AI Maps": 2.9, "IoT Explorer": 0.0, "IoT Wired": 0.0}, "Education": {"Dashboard Login": 36.8, "Open Roaming": 0.3, "Captive Portal": 0.0, "Detect & Locate API": 4.7, "Firehose API": 5.0, "SFTP Export": 3.3, "Signage App": 1.0, "Space Explorer": 0.0, "Partner Apps": 5.0, "AI Maps": 5.7, "IoT Explorer": 0.0, "IoT Wired": 0.3}, "Retail": {"Dashboard Login": 34.8, "Open Roaming": 0.9, "Captive Portal": 4.3, "Detect & Locate API": 2.6, "Firehose API": 5.2, "SFTP Export": 4.3, "Signage App": 1.7, "Space Explorer": 0.0, "Partner Apps": 1.7, "AI Maps": 9.6, "IoT Explorer": 0.0, "IoT Wired": 0.0}, "Manufacturing": {"Dashboard Login": 29.7, "Open Roaming": 0.0, "Captive Portal": 0.0, "Detect & Locate API": 1.1, "Firehose API": 2.2, "SFTP Export": 0.0, "Signage App": 2.2, "Space Explorer": 0.0, "Partner Apps": 1.1, "AI Maps": 3.3, "IoT Explorer": 0.0, "IoT Wired": 0.0}, "Government": {"Dashboard Login": 28.7, "Open Roaming": 0.0, "Captive Portal": 1.2, "Detect & Locate API": 1.2, "Firehose API": 1.2, "SFTP Export": 1.2, "Signage App": 0.0, "Space Explorer": 0.0, "Partner Apps": 1.2, "AI Maps": 3.8, "IoT Explorer": 0.0, "IoT Wired": 0.0}, "Technology": {"Dashboard Login": 35.7, "Open Roaming": 0.0, "Captive Portal": 0.0, "Detect & Locate API": 3.6, "Firehose API": 7.1, "SFTP Export": 0.0, "Signage App": 7.1, "Space Explorer": 0.0, "Partner Apps": 3.6, "AI Maps": 10.7, "IoT Explorer": 0.0, "IoT Wired": 0.0}}, "advantage": {"total": 3564, "onboarded": 1924, "dark": 1096, "dark_pct": 57.0, "active": 828, "middleware": {"Open Roaming": {"n": 5, "pct": 0.3}, "Captive Portal": {"n": 35, "pct": 1.8}, "AI Maps": {"n": 111, "pct": 5.8}, "IoT Explorer": {"n": 2, "pct": 0.1}, "IoT Wired": {"n": 4, "pct": 0.2}, "Detect & Locate API": {"n": 101, "pct": 5.2}, "Firehose API": {"n": 106, "pct": 5.5}}, "outcomes": {"Space Explorer": {"n": 0, "pct": 0.0}, "Signage App": {"n": 41, "pct": 2.1}, "Partner Apps": {"n": 113, "pct": 5.9}, "Dashboard Login": {"n": 690, "pct": 35.9}, "SFTP Export": {"n": 61, "pct": 3.2}}, "avg_engagement": 15.5, "top_accounts": [{"company_name": "Flint SI", "engagement": 79, "feature_count": 7, "vertical": "Workspaces", "region": "EMEAR", "adoption_level": "Power User", "churn_risk": "Healthy", "tier_ordinal": 3, "aps_onboarded": 13.0}, {"company_name": "RAI Amsterdam", "engagement": 75, "feature_count": 7, "vertical": "Generic", "region": "EMEAR", "adoption_level": "Power User", "churn_risk": "Healthy", "tier_ordinal": 3, "aps_onboarded": 684.0}, {"company_name": "Coventry University", "engagement": 74, "feature_count": 8, "vertical": "Education", "region": "EMEAR", "adoption_level": "Power User", "churn_risk": "Healthy", "tier_ordinal": 3, "aps_onboarded": 1648.0}, {"company_name": "Schiphol Telematics", "engagement": 74, "feature_count": 6, "vertical": "Transportation", "region": "EMEAR", "adoption_level": "Power User", "churn_risk": "Healthy", "tier_ordinal": 3, "aps_onboarded": 1316.0}, {"company_name": "KAUST", "engagement": 70, "feature_count": 5, "vertical": "Education", "region": "EMEAR", "adoption_level": "Power User", "churn_risk": "Healthy", "tier_ordinal": 3, "aps_onboarded": 1114.0}, {"company_name": "LLOYDS BANKING GROUP LBG", "engagement": 69, "feature_count": 6, "vertical": "Workspaces", "region": "APJC", "adoption_level": "Power User", "churn_risk": "Healthy", "tier_ordinal": 3, "aps_onboarded": 4335.0}, {"company_name": "AnyWeb AG", "engagement": 66, "feature_count": 6, "vertical": "Generic", "region": "EMEAR", "adoption_level": "Power User", "churn_risk": "Healthy", "tier_ordinal": 3, "aps_onboarded": 8.0}, {"company_name": "Milton Keynes University Hospital NHS Foundation Trust", "engagement": 65, "feature_count": 5, "vertical": "Healthcare", "region": "EMEAR", "adoption_level": "Power User", "churn_risk": "Healthy", "tier_ordinal": 3, "aps_onboarded": 582.0}, {"company_name": "International Convention Centre Sydney", "engagement": 65, "feature_count": 1, "vertical": "Generic", "region": "Americas", "adoption_level": "Feature Active", "churn_risk": "Healthy", "tier_ordinal": 3, "aps_onboarded": 935.0}, {"company_name": "UCF", "engagement": 64, "feature_count": 1, "vertical": "Education", "region": "Americas", "adoption_level": "Feature Active", "churn_risk": "Healthy", "tier_ordinal": 3, "aps_onboarded": 5538.0}, {"company_name": "UCB", "engagement": 63, "feature_count": 5, "vertical": "Workspaces", "region": "EMEAR", "adoption_level": "Power User", "churn_risk": "Healthy", "tier_ordinal": 3, "aps_onboarded": 2367.0}, {"company_name": "FORD-WERKE GMBH", "engagement": 63, "feature_count": 1, "vertical": "Workspaces", "region": "Americas", "adoption_level": "Feature Active", "churn_risk": "Healthy", "tier_ordinal": 3, "aps_onboarded": 18083.0}, {"company_name": "Indiana University Health", "engagement": 63, "feature_count": 1, "vertical": "Healthcare", "region": "APJC", "adoption_level": "Feature Active", "churn_risk": "Healthy", "tier_ordinal": 3, "aps_onboarded": 11197.0}, {"company_name": "NEW YORK CITY HEALTH AND HOSPITALS CORP", "engagement": 63, "feature_count": 1, "vertical": "Healthcare", "region": "Americas", "adoption_level": "Feature Active", "churn_risk": "Healthy", "tier_ordinal": 3, "aps_onboarded": 19309.0}, {"company_name": "UNIVERSITY OF KENTUCKY", "engagement": 62, "feature_count": 1, "vertical": "Education", "region": "Americas", "adoption_level": "Feature Active", "churn_risk": "Healthy", "tier_ordinal": 3, "aps_onboarded": 12407.0}, {"company_name": "Heriot Watt University Dubai", "engagement": 61, "feature_count": 4, "vertical": "Education", "region": "EMEAR", "adoption_level": "Power User", "churn_risk": "Healthy", "tier_ordinal": 3, "aps_onboarded": 212.0}, {"company_name": "Intility AS", "engagement": 61, "feature_count": 4, "vertical": "Generic", "region": "EMEAR", "adoption_level": "Power User", "churn_risk": "Healthy", "tier_ordinal": 3, "aps_onboarded": 53.0}, {"company_name": "MERCY", "engagement": 60, "feature_count": 1, "vertical": "Generic", "region": "Americas", "adoption_level": "Feature Active", "churn_risk": "Healthy", "tier_ordinal": 3, "aps_onboarded": 9740.0}, {"company_name": "NTT Limited", "engagement": 60, "feature_count": 1, "vertical": "N/A", "region": "APJC", "adoption_level": "Feature Active", "churn_risk": "Healthy", "tier_ordinal": 3, "aps_onboarded": 10.0}, {"company_name": "UK Research and Innovation", "engagement": 59, "feature_count": 5, "vertical": "Workspaces", "region": "EMEAR", "adoption_level": "Power User", "churn_risk": "Healthy", "tier_ordinal": 3, "aps_onboarded": 17.0}], "dark_by_region": {"Americas": 601, "EMEAR": 342, "APJC": 147}, "dark_by_journey": {"Network Onboarded": 865, "Setup Complete - Business units defined": 142, "Setup Complete - Timezone Updated": 80, "Setup Complete - Full Metadata Updated": 7, "Report Started": 1, "Setup Complete - Sq. ft. Updated": 1}, "adoption": {"Location Active": 633, "Feature Active": 615, "Onboarded Only": 427, "Multi-Feature": 115, "Deep Adoption": 73, "Location + Maps": 28, "Power User": 25, "Maps Only": 8}, "churn": {"Critical": 1546, "High": 1096, "Medium": 400, "Low": 390, "Healthy": 132}}, "churn": {"distribution": {"Critical": 1550, "High": 1108, "Low": 419, "Medium": 414, "Healthy": 147}, "total_at_risk": 2658, "at_risk_pct": 73.1}, "showcase": [{"company": "Flint SI", "tier": "Advantage", "score": 79, "features": 7, "vertical": "Workspaces", "region": "EMEAR", "adoption": "Power User", "caps": ["Dashboard Login", "Detect & Locate API", "Firehose API", "Signage App", "Partner Apps", "AI Maps", "IoT Wired"], "extras": ["Sensors", "Signage", "Partner: Kio Cloud UK"]}, {"company": "RAI Amsterdam", "tier": "Advantage", "score": 75, "features": 7, "vertical": "Generic", "region": "EMEAR", "adoption": "Power User", "caps": ["Dashboard Login", "Open Roaming", "Captive Portal", "Firehose API", "SFTP Export", "Partner Apps", "IoT Wired"], "extras": ["Sensors", "Occupancy", "Partner: MapsIndoors"]}, {"company": "Coventry University", "tier": "Advantage", "score": 74, "features": 8, "vertical": "Education", "region": "EMEAR", "adoption": "Power User", "caps": ["Dashboard Login", "Open Roaming", "Detect & Locate API", "Firehose API", "SFTP Export", "Signage App", "Partner Apps", "AI Maps"], "extras": ["Sensors", "Signage", "Partner: Kio Cloud UK"]}, {"company": "Schiphol Telematics", "tier": "Advantage", "score": 74, "features": 6, "vertical": "Transportation", "region": "EMEAR", "adoption": "Power User", "caps": ["Dashboard Login", "Open Roaming", "Captive Portal", "Detect & Locate API", "Firehose API", "Partner Apps"], "extras": ["Sensors", "Partner: Undagrid Smart Airpor"]}, {"company": "Tomas Harglin", "tier": "Unknown", "score": 71, "features": 7, "vertical": "Generic", "region": "EMEAR", "adoption": "Power User", "caps": ["Dashboard Login", "Detect & Locate API", "Firehose API", "Signage App", "Partner Apps", "AI Maps", "IoT Explorer"], "extras": ["Sensors", "Signage", "Partner: HibouAir Lite"]}, {"company": "KAUST", "tier": "Advantage", "score": 70, "features": 5, "vertical": "Education", "region": "EMEAR", "adoption": "Power User", "caps": ["Detect & Locate API", "Firehose API", "Signage App", "Partner Apps", "AI Maps"], "extras": ["Sensors", "Signage", "Partner: Selvam_MT_TEST"]}, {"company": "LLOYDS BANKING GROUP LBG", "tier": "Advantage", "score": 69, "features": 6, "vertical": "Workspaces", "region": "APJC", "adoption": "Power User", "caps": ["Dashboard Login", "Firehose API", "SFTP Export", "Signage App", "Partner Apps", "AI Maps"], "extras": ["Sensors", "Signage", "Partner: Kio Cloud UK"]}, {"company": "ACP IT Solutions LAB", "tier": "Unknown", "score": 68, "features": 6, "vertical": "Generic", "region": "EMEAR", "adoption": "Power User", "caps": ["Dashboard Login", "Detect & Locate API", "Firehose API", "Signage App", "Partner Apps", "AI Maps"], "extras": ["Sensors", "Signage", "Partner: Kio Cloud EU"]}, {"company": "NTT GERMANY AG & CO. KG", "tier": "Premier", "score": 68, "features": 6, "vertical": "Generic", "region": "APJC", "adoption": "Power User", "caps": ["Dashboard Login", "Detect & Locate API", "Firehose API", "Signage App", "Partner Apps", "AI Maps"], "extras": ["Sensors", "Signage", "Partner: STANLEY Healthcare RT"]}, {"company": "AnyWeb AG", "tier": "Advantage", "score": 66, "features": 6, "vertical": "Generic", "region": "EMEAR", "adoption": "Power User", "caps": ["Dashboard Login", "Open Roaming", "Detect & Locate API", "Firehose API", "Signage App", "AI Maps"], "extras": ["Sensors", "Signage", "Partner: AnyTemp_TEST"]}, {"company": "Milton Keynes University Hospital NHS Foundation Trust", "tier": "Advantage", "score": 65, "features": 5, "vertical": "Healthcare", "region": "EMEAR", "adoption": "Power User", "caps": ["Dashboard Login", "Firehose API", "Signage App", "Partner Apps", "AI Maps"], "extras": ["Sensors", "Signage", "Partner: Kio Cloud UK"]}, {"company": "International Convention Centre Sydney", "tier": "Advantage", "score": 65, "features": 1, "vertical": "Generic", "region": "Americas", "adoption": "Feature Active", "caps": ["Dashboard Login"], "extras": ["Sensors", "Signage", "Partner: Kio Cloud"]}], "timeline": {"months": ["2020-09", "2020-10", "2020-11", "2020-12", "2021-02", "2021-03", "2021-04", "2021-05", "2021-06", "2021-07", "2021-08", "2021-09", "2021-10", "2021-11", "2021-12", "2022-01", "2022-02", "2022-03", "2022-04", "2022-05", "2022-06", "2022-07", "2022-08", "2022-09", "2022-10", "2022-11", "2022-12", "2023-01", "2023-02", "2023-03", "2023-04", "2023-05", "2023-06", "2023-07", "2023-08", "2023-09", "2023-10", "2023-11", "2023-12", "2024-01", "2024-02", "2024-03", "2024-04", "2024-05", "2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12", "2025-01", "2025-02", "2025-03", "2025-04", "2025-05", "2025-06", "2025-07", "2025-08", "2025-09", "2025-10", "2025-11", "2026-01", "2026-02"], "accounts": [9, 1, 1, 1, 1, 3, 10, 4, 2, 5, 1, 2, 5, 3, 3, 2, 3, 8, 4, 2, 3, 1, 1, 8, 5, 3, 2, 2, 7, 3, 8, 5, 5, 4, 8, 6, 8, 10, 3, 3, 2, 3, 3, 3, 4, 6, 4, 2, 1, 4, 3, 8, 5, 5, 4, 5, 4, 4, 3, 4, 7, 2, 2, 1], "avg_eng": [37.9, 9.0, 21.0, 25.0, 38.0, 54.0, 34.2, 32.5, 43.0, 57.2, 26.0, 66.5, 34.4, 36.3, 28.7, 65.5, 45.7, 44.1, 48.5, 46.0, 24.0, 46.0, 31.0, 38.5, 45.8, 29.7, 16.0, 64.5, 44.7, 32.3, 37.5, 32.0, 57.6, 31.5, 39.6, 31.5, 40.0, 39.0, 42.0, 40.3, 37.0, 29.3, 57.0, 42.3, 48.5, 48.2, 38.2, 56.0, 28.0, 40.0, 49.7, 52.8, 48.4, 40.0, 41.8, 42.2, 51.2, 42.8, 52.7, 32.8, 38.6, 4.0, 52.0, 12.0]}, "gaps": {"null_rates": {"vertical": 82.8, "controller_type": 99.4, "aps_onboarded": 81.2, "license_qty": 98.5, "unique_logins_30d": 99.9, "sensors_claimed": 97.4, "use_cases_count": 98.5, "sq_feet": 96.8, "partner_app": 98.7, "connection_type": 91.4}, "notes": ["Only 21.8% of onboarded accounts show any feature usage \u2014 5,686 onboarded accounts are feature-dark", "Engagement median is 8.0 out of 100 \u2014 half of onboarded accounts have near-zero measured activity", "Feature usage is binary (Yes/No) \u2014 no frequency, session depth, or recency data available", "No ACV/revenue data \u2014 using license_quantity \u00d7 tier as proxy", "No stakeholder/persona data \u2014 cannot distinguish IT admin from facilities/real estate users", "No NPS/CSAT linked to product telemetry", "16,936 accounts (82.8%) have no vertical classification", "Signage event data exists for only 380 accounts \u2014 rich but narrow", "Sensor pipeline data covers 312 accounts \u2014 small but reveals conversion gaps"]}};
+const app = document.getElementById('app');
+
+const P1='#049fd9',P2='#0284c7',P3='#38bdf8',P4='#7dd3fc',P5='#0369a1';
+const G1='#059669',G2='#10b981',R1='#dc2626',R2='#f87171',Y1='#f59e0b',GR1='#d1d5db',GR2='#9ca3af';
+const PAL=['#049fd9','#059669','#6366f1','#ec4899','#f59e0b','#8b5cf6','#14b8a6','#e11d48','#0ea5e9','#84cc16','#a855f7','#f97316','#d946ef','#eab308','#06b6d4'];
+
+Chart.defaults.color='#9ca3af';
+Chart.defaults.borderColor='#f0f0f0';
+Chart.defaults.font.family='Inter';
+Chart.defaults.responsive=true;
+Chart.defaults.maintainAspectRatio=true;
+const isMobile = window.innerWidth <= 640;
+if(isMobile){Chart.defaults.font.size=10;Chart.defaults.plugins.legend.labels.font={size:9};Chart.defaults.plugins.legend.labels.boxWidth=8}
+
+function mk(tag,cls,inner){return `<${tag}${cls?` class="${cls}"`:''}>${inner||''}</${tag}>`}
+function sec(id,badge,title,content){return `<div class="section" id="${id}">${mk('div','section-title',`<span class="badge">${badge}</span>${title}`)}${content}</div>`}
+function crd(title,inner,canvasId){return `<div class="card">${title?mk('h3','',title):''}${inner||''}${canvasId?`<canvas id="${canvasId}"></canvas>`:''}</div>`}
+function ins(title,inner){return `<div class="insight">${mk('h3','',title)}${inner}</div>`}
+function insW(title,inner){return `<div class="insight-warn">${mk('h3','',title)}${inner}</div>`}
+const barOpts=(h=false,leg=false)=>({indexAxis:h?'y':'x',plugins:{legend:{display:leg,labels:{font:{size:isMobile?9:12}}}},scales:{[h?'x':'y']:{beginAtZero:true,grid:{color:'#f0f0f0'},ticks:{font:{size:isMobile?9:11}}},[h?'y':'x']:{grid:{display:false},ticks:{font:{size:isMobile?9:11}}}}});
+
+let html = '';
+const K = D.kpis;
+
+// ═══════════════════════════════════════════════════════════
+// KPIs
+// ═══════════════════════════════════════════════════════════
+html += `<div class="kpi-row">
+  <div class="kpi"><div class="n">${K.total.toLocaleString()}</div><div class="l">Total Accounts</div></div>
+  <div class="kpi"><div class="n">${K.onboarded.toLocaleString()}</div><div class="l">Onboarded</div><div class="sub">${K.onboarded_pct}%</div></div>
+  <div class="kpi"><div class="n warn">${K.any_feature_pct}%</div><div class="l">Feature Active</div><div class="sub">${K.any_feature.toLocaleString()} of onboarded</div></div>
+  <div class="kpi"><div class="n warn">${K.deep_pct}%</div><div class="l">Deep Adoption</div><div class="sub">3+ features</div></div>
+  <div class="kpi"><div class="n">${K.avg_engagement}</div><div class="l">Avg Engagement</div><div class="sub">out of 100</div></div>
+  <div class="kpi"><div class="n good">${K.power_users}</div><div class="l">Power Users</div></div>
+  <div class="kpi"><div class="n">${K.partner_accounts}</div><div class="l">Partner Apps</div></div>
+</div>`;
+
+// ═══════════════════════════════════════════════════════════
+// 1. OVERVIEW
+// ═══════════════════════════════════════════════════════════
+let tierTbl = '<div class="tbl-wrap"><table><thead><tr><th>Tier</th><th>Accounts</th><th>Onboarded</th><th>Onb %</th><th>Feature Active %</th><th>Location Active %</th><th>Deep %</th><th>Avg Engagement</th><th>Paid %</th></tr></thead><tbody>';
+for(const t of ['See','Essentials','Advantage','Premier','Unknown']){
+  const d=D.tiers[t]; if(!d) continue;
+  tierTbl += `<tr><td><strong>${t}</strong></td><td>${d.total.toLocaleString()}</td><td>${d.onboarded.toLocaleString()}</td><td>${d.onboarded_pct}%</td><td>${d.any_feature_pct}%</td><td>${d.loc_active_pct}%</td><td>${d.deep_pct}%</td><td>${d.avg_engagement}</td><td>${d.paid_pct}%</td></tr>`;
+}
+tierTbl += '</tbody></table></div>';
+
+const overviewInsight = `<ul>
+  <li>Of <span class="hl">${K.onboarded.toLocaleString()}</span> onboarded accounts, only <span class="neg">${K.any_feature_pct}%</span> show any feature-level activity. <strong>${(K.onboarded - K.any_feature).toLocaleString()} onboarded accounts are completely feature-dark.</strong></li>
+  <li>Engagement score median is <span class="neg">${K.median_engagement}</span> out of 100. Half the onboarded base has near-zero measured activity.</li>
+  <li><span class="hl">Premier</span> accounts show dramatically higher engagement than Essentials — but the sample is tiny (${D.tiers.Premier?.total || 0}).</li>
+  <li>The <strong>Advantage tier</strong> (${D.tiers.Advantage?.total.toLocaleString() || 0} accounts) is the critical mass — highest revenue impact, but ${D.advantage.dark_pct}% of onboarded Advantage accounts are dark.</li>
+  <li>Only <span class="hl">${K.deep_pct}%</span> of onboarded accounts reach "deep adoption" (3+ features). The funnel narrows dramatically after the first feature.</li>
+</ul>`;
+
+html += sec('overview','01','Overview: The State of the Install Base',`
+  ${ins('The Headline Numbers', overviewInsight)}
+  ${crd('Tier Comparison', tierTbl)}
+  <div class="g2">
+    ${crd('Accounts by Tier','','tierPieChart')}
+    ${crd('Engagement Distribution (Onboarded)','','engDistChart')}
+  </div>
+`);
+
+// ═══════════════════════════════════════════════════════════
+// 2. ADOPTION FUNNEL (onboarded only)
+// ═══════════════════════════════════════════════════════════
+const funnelOrder = Object.keys(D.funnel);
+const funnelTotal = Object.values(D.funnel).reduce((a,b)=>a+b,0);
+
+let funnelInsight = `<ul>
+  <li>Base: <span class="hl">${funnelTotal.toLocaleString()}</span> onboarded accounts (Network Onboarded or beyond). This is the addressable adoption universe.</li>
+  <li><span class="neg">${D.funnel['Onboarded Only']?.toLocaleString() || 0}</span> accounts (${(D.funnel['Onboarded Only']/funnelTotal*100).toFixed(1)}%) are "onboarded only" — network connected but zero product engagement.</li>
+  <li><span class="hl">${(D.funnel['Location Active']||0).toLocaleString()}</span> accounts have location services active — the largest segment. But most stop here.</li>
+  <li>The drop from "Feature Active" (${D.funnel['Feature Active']||0}) to "Multi-Feature" (${D.funnel['Multi-Feature']||0}) is <span class="neg">${((1 - (D.funnel['Multi-Feature']||0)/(D.funnel['Feature Active']||1))*100).toFixed(0)}%</span>. Second-feature activation is the critical bottleneck.</li>
+  <li>Only <span class="hl">${D.funnel['Power User']||0}</span> accounts reach "Power User" status — that's <span class="neg">${((D.funnel['Power User']||0)/funnelTotal*100).toFixed(2)}%</span> of the onboarded base.</li>
+</ul>`;
+
+html += sec('funnel','02','Adoption Funnel — Onboarded Accounts Only',`
+  ${ins('Funnel Analysis (n=' + funnelTotal.toLocaleString() + ' onboarded)', funnelInsight)}
+  <div class="g2">
+    ${crd('Adoption Stages','','funnelChart')}
+    ${crd('Funnel by Tier (Onboarded)','','funnelTierChart')}
+  </div>
+`);
+
+// ═══════════════════════════════════════════════════════════
+// 3. INFRASTRUCTURE → ADOPTION
+// ═══════════════════════════════════════════════════════════
+const mi = D.maps_impact;
+const si = D.sensors_impact;
+const ci = D.connector_impact;
+const ai = D.adv_gw_impact;
+
+let mapsMulti = mi.with.avg_feat > 0 && mi.without.avg_feat > 0 ? (mi.with.avg_feat / mi.without.avg_feat).toFixed(1) : '?';
+let sensMulti = si.with.avg_eng > 0 && si.without.avg_eng > 0 ? (si.with.avg_eng / si.without.avg_eng).toFixed(1) : '?';
+
+let infraInsight = `<ul>
+  <li><span class="hl">Maps configured</span> → <span class="pos">${mapsMulti}x</span> more features (${mi.with.avg_feat} vs ${mi.without.avg_feat}) and <span class="pos">${mi.with.avg_eng} vs ${mi.without.avg_eng}</span> engagement. Maps are a <strong>prerequisite</strong>, not optional.</li>
+  <li><span class="hl">Sensors deployed</span> → <span class="pos">${sensMulti}x</span> engagement (${si.with.avg_eng} vs ${si.without.avg_eng}). Sensor presence is the strongest adoption signal.</li>
+  <li><span class="hl">Connector present</span> → ${ci.with.avg_feat} vs ${ci.without.avg_feat} avg features. Connector is the bridge from infrastructure to product.</li>
+  <li><span class="hl">Advanced AP Gateway</span> → ${ai.with.avg_eng} vs ${ai.without.avg_eng} engagement. Advanced gateways unlock deeper capabilities.</li>
+  <li>Pattern: <strong>Each infrastructure layer added roughly doubles adoption depth.</strong> This is the strongest signal in the data.</li>
+</ul>`;
+
+let infraTbl = '<div class="tbl-wrap"><table><thead><tr><th>Infrastructure Component</th><th>With (n)</th><th>Avg Features</th><th>Avg Engagement</th><th>Feature Active %</th><th>Without (n)</th><th>Avg Features</th><th>Avg Engagement</th></tr></thead><tbody>';
+for(const [label, data] of [['Maps Configured', mi],['Sensors Deployed', si],['Connector', ci],['Advanced AP Gateway', ai]]){
+  infraTbl += `<tr><td><strong>${label}</strong></td><td>${data.with.n}</td><td><span class="pos">${data.with.avg_feat}</span></td><td><span class="pos">${data.with.avg_eng}</span></td><td>${data.with.any_feat_pct}%</td><td>${data.without.n}</td><td>${data.without.avg_feat}</td><td>${data.without.avg_eng}</td></tr>`;
+}
+infraTbl += '</tbody></table></div>';
+
+html += sec('infra','03','Infrastructure → Adoption: The Multiplier Effect',`
+  ${ins('Infrastructure is Destiny', infraInsight)}
+  ${crd('Infrastructure Impact Comparison', infraTbl)}
+  ${D.ap_density ? crd('AP Density vs Adoption (Quartiles)','','apDensityChart') : ''}
+`);
+
+// ═══════════════════════════════════════════════════════════
+// 4. CORRELATIONS
+// ═══════════════════════════════════════════════════════════
+const corrs = D.correlations || [];
+const corrFeat = corrs.filter(c=>c.target==='feature_count').slice(0,8);
+const corrEng = corrs.filter(c=>c.target==='engagement').slice(0,8);
+
+let corrInsight = '<ul>';
+for(const c of corrs.slice(0,7)){
+  const dir = c.r > 0 ? 'pos' : 'neg';
+  corrInsight += `<li><span class="${dir}">r=${c.r>0?'+':''}${c.r}</span> — <span class="hl">${c.pair}</span></li>`;
+}
+corrInsight += '</ul>';
+
+html += sec('correlations','04','Non-Obvious Correlations',`
+  <div class="g2">
+    ${ins('Strongest Statistical Relationships (Onboarded)', corrInsight)}
+    ${crd('Top Correlations','','corrChart')}
+  </div>
+`);
+
+// ═══════════════════════════════════════════════════════════
+// 5. FEATURE ADOPTION
+// ═══════════════════════════════════════════════════════════
+html += sec('features','05','Product Feature Adoption',`
+  <div class="g2">
+    ${crd('Feature Usage Rate (All Accounts)','','featAllChart')}
+    ${crd('Feature Depth — How Many Features? (Onboarded)','','featDepthChart')}
+  </div>
+  ${crd('Feature Co-occurrence — Which Are Used Together?','<p class="card-sub">Accounts using 2+ features. Top pairs by count.</p>','cooccurChart')}
+  ${crd('Feature Usage by Tier (% of onboarded)','','featTierChart')}
+`);
+
+// ═══════════════════════════════════════════════════════════
+// 6. ADVANTAGE DEEP DIVE
+// ═══════════════════════════════════════════════════════════
+const ADV = D.advantage;
+const advInsight = `<ul>
+  <li><span class="hl">${ADV.total.toLocaleString()}</span> Advantage accounts total, <span class="hl">${ADV.onboarded.toLocaleString()}</span> onboarded.</li>
+  <li><span class="neg">${ADV.dark_pct}%</span> of onboarded Advantage accounts are <strong>completely dark</strong> — zero feature usage. That's <span class="neg">${ADV.dark.toLocaleString()}</span> accounts paying for capabilities they've never touched.</li>
+  <li>Only <span class="hl">${ADV.active}</span> onboarded Advantage accounts show any feature activity. The activation rate is <span class="neg">${(100 - ADV.dark_pct).toFixed(1)}%</span>.</li>
+  <li>Dashboard Login is the most-used feature (${ADV.outcomes['Dashboard Login']?.pct || 0}%), but that's a hygiene metric, not adoption.</li>
+  <li>Among Advantage dark accounts, <span class="hl">${Object.values(ADV.dark_by_journey).reduce((a,b)=>a+b,0)}</span> are at various journey stages — many have completed network setup but never activated any product feature.</li>
+</ul>`;
+
+let advTopTbl = '<div class="tbl-wrap"><table><thead><tr><th>Company</th><th>Score</th><th>Features</th><th>Vertical</th><th>Region</th><th>Adoption</th><th>Churn</th></tr></thead><tbody>';
+for(const a of ADV.top_accounts.slice(0,15)){
+  const riskCls = a.churn_risk==='Healthy'?'pill-good':a.churn_risk==='Low'?'pill-up':a.churn_risk==='Medium'?'pill-flat':'pill-warn';
+  advTopTbl += `<tr><td><strong>${a.company_name}</strong></td><td><span class="hl">${a.engagement}</span></td><td>${a.feature_count}</td><td>${a.vertical}</td><td>${a.region}</td><td><span class="pill pill-tag">${String(a.adoption_level).replace('Level ','')}</span></td><td><span class="pill ${riskCls}">${a.churn_risk}</span></td></tr>`;
+}
+advTopTbl += '</tbody></table></div>';
+
+html += sec('advantage','06','Advantage Tier — The Core Revenue Story',`
+  ${insW('The Dark Account Problem (Advantage)', advInsight)}
+  <div class="g2">
+    ${crd('Middleware Layer Usage (Onboarded Advantage)','','advMwChart')}
+    ${crd('Outcomes Layer Usage (Onboarded Advantage)','','advOutChart')}
+  </div>
+  <div class="g2">
+    ${crd('Advantage Adoption Levels (Onboarded)','','advAdoptChart')}
+    ${crd('Dark Accounts by Journey Stage','','advDarkChart')}
+  </div>
+  ${crd('Top 15 Advantage Accounts by Engagement', advTopTbl)}
+`);
+
+// ═══════════════════════════════════════════════════════════
+// 7. CHURN RISK
+// ═══════════════════════════════════════════════════════════
+const CHR = D.churn;
+html += sec('churn','07','Churn Risk — Advantage & Premier',`
+  ${insW('Revenue at Risk', `<ul>
+    <li><span class="neg">${CHR.at_risk_pct}%</span> of Advantage + Premier accounts are at <strong>Critical or High</strong> churn risk. These are paying customers who have never used what they bought.</li>
+    <li><strong>Critical</strong> = not onboarded + zero features. <strong>High</strong> = onboarded but zero features. Both are pre-churn states.</li>
+    <li>This is the #1 commercial risk to address at the offsite. Each of these accounts is a renewal conversation waiting to go badly.</li>
+  </ul>`)}
+  ${crd('Churn Risk Distribution','','churnChart')}
+`);
+
+// ═══════════════════════════════════════════════════════════
+// 8. SENSOR PIPELINE
+// ═══════════════════════════════════════════════════════════
+const SP = D.sensor_pipeline || {};
+if(SP.accounts_with_discovery){
+  html += sec('sensors','08','IoT Sensor Pipeline — Conversion Funnel',`
+    ${ins('Sensor Activation Conversion', `<ul>
+      <li><span class="hl">${SP.accounts_with_discovery}</span> accounts have discovered sensors. But only <span class="neg">${SP.discover_to_claim_pct}%</span> of discovered sensors get claimed.</li>
+      <li><span class="hl">${SP.total_discovered.toLocaleString()}</span> sensors discovered → <span class="hl">${SP.total_claimed.toLocaleString()}</span> claimed → <span class="hl">${SP.total_configured.toLocaleString()}</span> configured.</li>
+      <li>Claim-to-config rate: <span class="${SP.claim_to_config_pct > 50 ? 'pos' : 'neg'}">${SP.claim_to_config_pct}%</span>. ${SP.claim_to_config_pct > 50 ? 'Good conversion once claimed.' : 'Significant drop-off during configuration.'}</li>
+      <li>The discovery→claim gap is the biggest leak in the sensor pipeline. Accounts discover sensors but don't take the next step.</li>
+    </ul>`)}
+    ${crd('Sensor Pipeline Funnel','','sensorChart')}
+  `);
+}
+
+// ═══════════════════════════════════════════════════════════
+// 9. SIGNAGE & WAYFINDING
+// ═══════════════════════════════════════════════════════════
+const SIG = D.signage || {};
+if(SIG.total){
+  html += sec('signage','09','Signage & Wayfinding — End-User Engagement',`
+    ${ins('Signage is the Engagement Proof Point', `<ul>
+      <li><span class="hl">${SIG.total}</span> accounts have deployed signage devices — averaging <span class="hl">${SIG.avg_devices}</span> devices and <span class="hl">${SIG.avg_clicks}</span> clicks per account.</li>
+      <li>Top end-user interactions: Floor selection (<span class="hl">${SIG.top_events.floor_select}</span>), Room finder (<span class="hl">${SIG.top_events.room_finder}</span>), "Where am I?" (<span class="hl">${SIG.top_events.where_am_i}</span>).</li>
+      <li><span class="hl">${SIG.with_rich_map}</span> accounts have Rich Maps enabled, <span class="hl">${SIG.with_webex}</span> have WebEx Control Hub integration.</li>
+      <li>Signage accounts average <span class="hl">${SIG.avg_webex_devices}</span> imported WebEx devices — this is the bridge between Spaces and the broader Cisco collaboration stack.</li>
+      <li>This is the <strong>only data we have on actual end-user behavior</strong> (not admin/IT). Floor selection and room finder usage prove facilities-level value.</li>
+    </ul>`)}
+    <div class="g2">
+      ${crd('End-User Event Types','','sigEventsChart')}
+      ${crd('Signage Scale','<p class="card-sub">' + SIG.total + ' accounts</p>','sigScaleChart')}
+    </div>
+  `);
+}
+
+// ═══════════════════════════════════════════════════════════
+// 10. PARTNER ECOSYSTEM
+// ═══════════════════════════════════════════════════════════
+const PART = D.partners;
+let partInsight = '<ul>';
+const cats = Object.entries(PART.categories).sort((a,b)=>b[1]-a[1]);
+for(const [cat, n] of cats.slice(0,5)){
+  const adopt = PART.by_category[cat];
+  partInsight += `<li><span class="hl">${cat}</span>: ${n} accounts${adopt ? ` (avg engagement: ${adopt.avg_eng}, avg features: ${adopt.avg_feat})` : ''}</li>`;
+}
+partInsight += `<li><span class="hl">${PART.firehose_apps}</span> accounts have custom Firehose API integrations — the deepest form of platform dependency.</li>`;
+partInsight += '</ul>';
+
+html += sec('partners','10','Partner Ecosystem — Who Builds on Spaces?',`
+  ${ins('Partner Landscape', partInsight)}
+  <div class="g2">
+    ${crd('Partner App Categories','','partCatChart')}
+    ${crd('Top Individual Partner Apps','','partAppChart')}
+  </div>
+`);
+
+// ═══════════════════════════════════════════════════════════
+// 11. STALL POINTS
+// ═══════════════════════════════════════════════════════════
+const SP2 = D.stall_points;
+let stallInsight = '<ul>';
+const stallEntries = Object.entries(SP2).sort((a,b)=>b[1].n-a[1].n);
+for(const [stage, d] of stallEntries){
+  const short = stage.replace('Setup Complete - ','SC: ');
+  stallInsight += `<li><span class="hl">${short}</span> (${d.n.toLocaleString()}): <span class="${d.any_feature_pct > 30 ? 'pos' : 'neg'}">${d.any_feature_pct}%</span> feature active, ${d.loc_active_pct}% location active, ${d.maps_pct}% maps</li>`;
+}
+stallInsight += '</ul>';
+
+html += sec('stall','11','Journey Stall Points — Where Do Accounts Get Stuck?',`
+  ${ins('Stall Point Analysis (Onboarded)', stallInsight)}
+  ${crd('Feature Active % by Journey Stage','','stallChart')}
+`);
+
+// ═══════════════════════════════════════════════════════════
+// 12. REGIONS
+// ═══════════════════════════════════════════════════════════
+let regTbl = '<div class="tbl-wrap"><table><thead><tr><th>Region</th><th>Accounts</th><th>Onboarded</th><th>Onb %</th><th>Feature Active %</th><th>Loc Active %</th><th>Avg Engagement</th><th>Avg Features</th></tr></thead><tbody>';
+for(const r of ['Americas','EMEAR','APJC']){
+  const d = D.regions[r]; if(!d) continue;
+  regTbl += `<tr><td><strong>${r}</strong></td><td>${d.total.toLocaleString()}</td><td>${d.onboarded.toLocaleString()}</td><td>${d.onboarded_pct}%</td><td>${d.any_feature_pct}%</td><td>${d.loc_active_pct}%</td><td>${d.avg_engagement}</td><td>${d.avg_features}</td></tr>`;
+}
+regTbl += '</tbody></table></div>';
+
+html += sec('regions','12','Regional Analysis',`
+  ${crd('Region Comparison', regTbl)}
+  ${crd('Regional Metrics','','regionChart')}
+`);
+
+// ═══════════════════════════════════════════════════════════
+// 13. VERTICALS
+// ═══════════════════════════════════════════════════════════
+let vertTbl = '<div class="tbl-wrap"><table><thead><tr><th>Vertical</th><th>Accounts</th><th>Onboarded</th><th>Feature Active %</th><th>Avg Features</th><th>Avg Engagement</th><th>Deep %</th><th>Loc Active %</th><th>Partner %</th></tr></thead><tbody>';
+for(const [v, d] of Object.entries(D.verticals).slice(0,15)){
+  const cls = d.any_feature_pct > 30 ? 'pill-good' : d.any_feature_pct > 15 ? 'pill-flat' : 'pill-warn';
+  vertTbl += `<tr><td><strong>${v}</strong></td><td>${d.total}</td><td>${d.onboarded}</td><td><span class="pill ${cls}">${d.any_feature_pct}%</span></td><td>${d.avg_features}</td><td>${d.avg_engagement}</td><td>${d.deep_pct}%</td><td>${d.loc_active_pct}%</td><td>${d.has_partner_pct}%</td></tr>`;
+}
+vertTbl += '</tbody></table></div>';
+
+html += sec('verticals','13','Vertical Segmentation',`
+  ${crd('Vertical Adoption Depth', vertTbl)}
+  ${crd('Vertical × Feature Heatmap (% of onboarded)','','heatmapChart')}
+`);
+
+// ═══════════════════════════════════════════════════════════
+// 14. SHOWCASE
+// ═══════════════════════════════════════════════════════════
+let showTbl = '<div class="tbl-wrap"><table><thead><tr><th>Company</th><th>Tier</th><th>Score</th><th>Features</th><th>Vertical</th><th>Region</th><th>Active Capabilities</th></tr></thead><tbody>';
+for(const a of D.showcase){
+  const caps = [...a.caps, ...a.extras].map(c=>`<span class="pill pill-tag">${c}</span>`).join(' ');
+  showTbl += `<tr><td><strong>${a.company}</strong></td><td>${a.tier}</td><td><span class="hl">${a.score}</span></td><td>${a.features}</td><td>${a.vertical}</td><td>${a.region}</td><td>${caps}</td></tr>`;
+}
+showTbl += '</tbody></table></div>';
+
+html += sec('showcase','14','Showcase Accounts — What Good Looks Like',`
+  <div class="quote">These are the top ${D.showcase.length} accounts by engagement score. Study them for replication patterns — what infrastructure, vertical, and feature combination produces genuine adoption?</div>
+  ${crd('Top Accounts', showTbl)}
+`);
+
+// ═══════════════════════════════════════════════════════════
+// 15. DATA GAPS
+// ═══════════════════════════════════════════════════════════
+let gapItems = D.gaps.notes.map(n=>`<li>${n}</li>`).join('');
+
+let gapBars = '';
+const gr = D.gaps.null_rates;
+const sortedGaps = Object.entries(gr).sort((a,b)=>b[1]-a[1]);
+for(const [col, pct] of sortedGaps){
+  const color = pct>90?R1:pct>70?Y1:pct>50?'#f59e0b':G1;
+  gapBars += `<div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:0.82rem;font-weight:500"><span style="color:#374151">${col.replace(/_/g,' ')}</span><span style="color:${color}">${pct}% missing</span></div><div style="background:#f3f4f6;border-radius:6px;height:6px;overflow:hidden;margin-top:3px"><div style="height:100%;border-radius:6px;background:${color};width:${pct}%"></div></div></div>`;
+}
+
+html += sec('gaps','15','Data Gaps & Instrumentation Blind Spots',`
+  ${insW('What We Cannot Measure', '<ul>' + gapItems + '</ul>')}
+  ${crd('Column Fill Rates (Key Fields)', gapBars)}
+  <div class="quote">Before debating adoption strategy, align on <strong>measurement strategy</strong>. Current data only captures binary feature flags — we cannot answer frequency, depth, persona, or outcome questions. Richer instrumentation is a prerequisite for understanding adoption.</div>
+`);
+
+app.innerHTML = html;
+
+// ═══════════════════════════════════════════════════════════
+// CHARTS
+// ═══════════════════════════════════════════════════════════
+
+// Tier pie
+new Chart(document.getElementById('tierPieChart'),{type:'doughnut',data:{labels:Object.keys(D.tiers),datasets:[{data:Object.values(D.tiers).map(t=>t.total),backgroundColor:PAL}]},options:{plugins:{legend:{position:isMobile?'bottom':'right',labels:{font:{size:isMobile?9:12}}}}}});
+
+// Engagement distribution
+const engData = D.feature_depth;
+const engLabels = Object.keys(engData).sort((a,b)=>parseInt(a)-parseInt(b));
+new Chart(document.getElementById('engDistChart'),{type:'bar',data:{labels:engLabels.map(k=>k+' features'),datasets:[{label:'Onboarded Accounts',data:engLabels.map(k=>engData[k]),backgroundColor:engLabels.map(k=>parseInt(k)===0?R2:parseInt(k)<3?Y1:G1),borderRadius:6}]},options:barOpts()});
+
+// Funnel
+const fColors = [GR1,P4,P3,P2,P1,'#6366f1',G1,'#059669'];
+new Chart(document.getElementById('funnelChart'),{type:'bar',data:{labels:funnelOrder.map(l=>l.replace('Location ','Loc ').replace('Onboarded ','Onb ')),datasets:[{data:funnelOrder.map(k=>D.funnel[k]||0),backgroundColor:fColors,borderRadius:6}]},options:barOpts()});
+
+// Funnel by tier
+const fTiers = Object.keys(D.funnel_tier);
+new Chart(document.getElementById('funnelTierChart'),{type:'bar',data:{labels:funnelOrder.map(l=>l.replace('Location ','Loc ').replace('Onboarded ','Onb ')),datasets:fTiers.map((t,i)=>({label:t,data:funnelOrder.map(k=>(D.funnel_tier[t]||{})[k]||0),backgroundColor:PAL[i],borderRadius:3}))},options:{plugins:{legend:{display:true,position:'top'}},scales:{x:{stacked:true,grid:{display:false}},y:{stacked:true,beginAtZero:true,grid:{color:'#f0f0f0'}}}}});
+
+// AP Density
+if(D.ap_density){
+  const apK = Object.keys(D.ap_density);
+  new Chart(document.getElementById('apDensityChart'),{type:'bar',data:{labels:apK,datasets:[{label:'Avg Features',data:apK.map(k=>D.ap_density[k].avg_feat),backgroundColor:P1,borderRadius:4,yAxisID:'y'},{label:'Avg Engagement',data:apK.map(k=>D.ap_density[k].avg_eng),backgroundColor:G1,borderRadius:4,yAxisID:'y1'}]},options:{plugins:{legend:{display:true,position:'top'}},scales:{y:{position:'left',grid:{color:'#f0f0f0'},title:{display:true,text:'Avg Features',color:'#9ca3af'}},y1:{position:'right',grid:{display:false},title:{display:true,text:'Avg Engagement',color:'#9ca3af'}},x:{grid:{display:false},ticks:{font:{size:9}}}}}});
+}
+
+// Correlations
+if(D.correlations && D.correlations.length){
+  const topC = D.correlations.slice(0,14);
+  new Chart(document.getElementById('corrChart'),{type:'bar',data:{labels:topC.map(c=>c.pair),datasets:[{label:'r',data:topC.map(c=>c.r),backgroundColor:topC.map(c=>c.r>0?G1+'80':R1+'80'),borderColor:topC.map(c=>c.r>0?G1:R1),borderWidth:1,borderRadius:4}]},options:{indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{min:-1,max:1,grid:{color:'#f0f0f0'}},y:{grid:{display:false},ticks:{font:{size:9}}}}}});
+}
+
+// Feature all
+const featAll = D.features;
+const fLabels = Object.keys(featAll).sort((a,b)=>featAll[b].count-featAll[a].count);
+new Chart(document.getElementById('featAllChart'),{type:'bar',data:{labels:fLabels,datasets:[{label:'Accounts',data:fLabels.map(l=>featAll[l].count),backgroundColor:P1,borderRadius:4}]},options:barOpts(true)});
+
+// Feature depth
+new Chart(document.getElementById('featDepthChart'),{type:'bar',data:{labels:engLabels.map(k=>k+' features'),datasets:[{data:engLabels.map(k=>engData[k]),backgroundColor:engLabels.map(k=>parseInt(k)===0?R2:parseInt(k)<3?Y1:G1),borderRadius:6}]},options:barOpts()});
+
+// Co-occurrence
+const coK = Object.keys(D.cooccurrence);
+new Chart(document.getElementById('cooccurChart'),{type:'bar',data:{labels:coK,datasets:[{data:Object.values(D.cooccurrence),backgroundColor:'#6366f1',borderRadius:4}]},options:{indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{beginAtZero:true,grid:{color:'#f0f0f0'},title:{display:true,text:'Accounts using both',color:'#9ca3af'}},y:{grid:{display:false},ticks:{font:{size:9}}}}}});
+
+// Features by tier
+if(D.features_tier){
+  const ftTiers = Object.keys(D.features_tier);
+  const ftFeats = Object.keys(D.features_tier[ftTiers[0]]||{});
+  new Chart(document.getElementById('featTierChart'),{type:'bar',data:{labels:ftFeats,datasets:ftTiers.map((t,i)=>({label:t,data:ftFeats.map(f=>(D.features_tier[t]||{})[f]||0),backgroundColor:PAL[i],borderRadius:2}))},options:{plugins:{legend:{display:true,position:'top'}},scales:{y:{grid:{color:'#f0f0f0'},title:{display:true,text:'% of onboarded in tier',color:'#9ca3af'}},x:{grid:{display:false},ticks:{font:{size:9}}}}}});
+}
+
+// Advantage middleware
+const advMw = D.advantage.middleware;
+const mwK = Object.keys(advMw);
+new Chart(document.getElementById('advMwChart'),{type:'bar',data:{labels:mwK,datasets:[{data:mwK.map(k=>advMw[k].n),backgroundColor:'#6366f1',borderRadius:4}]},options:barOpts(true)});
+
+// Advantage outcomes
+const advOut = D.advantage.outcomes;
+const outK = Object.keys(advOut);
+new Chart(document.getElementById('advOutChart'),{type:'bar',data:{labels:outK,datasets:[{data:outK.map(k=>advOut[k].n),backgroundColor:P1,borderRadius:4}]},options:barOpts(true)});
+
+// Advantage adoption
+const advAdopt = D.advantage.adoption;
+const aaK = Object.keys(advAdopt);
+new Chart(document.getElementById('advAdoptChart'),{type:'bar',data:{labels:aaK,datasets:[{data:aaK.map(k=>advAdopt[k]),backgroundColor:fColors.slice(0,aaK.length),borderRadius:6}]},options:barOpts()});
+
+// Advantage dark by journey
+const advDark = D.advantage.dark_by_journey;
+const djK = Object.keys(advDark).sort((a,b)=>advDark[b]-advDark[a]);
+new Chart(document.getElementById('advDarkChart'),{type:'doughnut',data:{labels:djK,datasets:[{data:djK.map(k=>advDark[k]),backgroundColor:PAL}]},options:{plugins:{legend:{position:isMobile?'bottom':'right',labels:{font:{size:isMobile?9:11}}}}}});
+
+// Churn
+const chK = ['Critical','High','Medium','Low','Healthy'];
+const chColors = [R1,'#f97316',Y1,'#60a5fa',G1];
+new Chart(document.getElementById('churnChart'),{type:'bar',data:{labels:chK,datasets:[{data:chK.map(k=>(D.churn.distribution[k]||0)),backgroundColor:chColors,borderRadius:6}]},options:barOpts()});
+
+// Sensor pipeline
+if(D.sensor_pipeline){
+  const spStages = ['Discovered','Claimed','Configured'];
+  const spVals = [D.sensor_pipeline.total_discovered, D.sensor_pipeline.total_claimed, D.sensor_pipeline.total_configured];
+  new Chart(document.getElementById('sensorChart'),{type:'bar',data:{labels:spStages,datasets:[{data:spVals,backgroundColor:[P3,P1,G1],borderRadius:6}]},options:barOpts()});
+}
+
+// Signage events
+if(D.signage){
+  const sigEv = D.signage.top_events;
+  new Chart(document.getElementById('sigEventsChart'),{type:'bar',data:{labels:['Floor Selection','Room Finder','Where am I?'],datasets:[{data:[sigEv.floor_select, sigEv.room_finder, sigEv.where_am_i],backgroundColor:[P1,G1,'#6366f1'],borderRadius:6}]},options:barOpts()});
+  new Chart(document.getElementById('sigScaleChart'),{type:'bar',data:{labels:['Avg Devices','Avg Clicks','Avg Events','Avg WebEx Devices'],datasets:[{data:[D.signage.avg_devices, D.signage.avg_clicks, D.signage.avg_events, D.signage.avg_webex_devices],backgroundColor:PAL,borderRadius:6}]},options:barOpts()});
+}
+
+// Partner categories
+const pcK = Object.keys(D.partners.categories).sort((a,b)=>D.partners.categories[b]-D.partners.categories[a]);
+new Chart(document.getElementById('partCatChart'),{type:'bar',data:{labels:pcK,datasets:[{data:pcK.map(k=>D.partners.categories[k]),backgroundColor:PAL,borderRadius:4}]},options:barOpts(true)});
+
+// Partner apps
+const paK = Object.keys(D.partners.top_apps);
+new Chart(document.getElementById('partAppChart'),{type:'bar',data:{labels:paK,datasets:[{data:Object.values(D.partners.top_apps),backgroundColor:P1,borderRadius:4}]},options:barOpts(true)});
+
+// Stall points
+const stK = Object.keys(D.stall_points).sort((a,b)=>D.stall_points[b].n-D.stall_points[a].n);
+new Chart(document.getElementById('stallChart'),{type:'bar',data:{labels:stK.map(k=>k.replace('Setup Complete - ','SC: ')),datasets:[{label:'Feature Active %',data:stK.map(k=>D.stall_points[k].any_feature_pct),backgroundColor:P1,borderRadius:4},{label:'Location Active %',data:stK.map(k=>D.stall_points[k].loc_active_pct),backgroundColor:G1,borderRadius:4},{label:'Maps %',data:stK.map(k=>D.stall_points[k].maps_pct),backgroundColor:'#6366f1',borderRadius:4}]},options:{plugins:{legend:{display:true,position:'top'}},scales:{y:{grid:{color:'#f0f0f0'},max:100,title:{display:true,text:'%',color:'#9ca3af'}},x:{grid:{display:false},ticks:{font:{size:9}}}}}});
+
+// Regions
+const regK = Object.keys(D.regions);
+new Chart(document.getElementById('regionChart'),{type:'bar',data:{labels:regK,datasets:[{label:'Onboarded %',data:regK.map(k=>D.regions[k].onboarded_pct),backgroundColor:P1,borderRadius:4},{label:'Feature Active %',data:regK.map(k=>D.regions[k].any_feature_pct),backgroundColor:Y1,borderRadius:4},{label:'Loc Active %',data:regK.map(k=>D.regions[k].loc_active_pct),backgroundColor:G1,borderRadius:4}]},options:{plugins:{legend:{display:true,position:'top'}},scales:{y:{grid:{color:'#f0f0f0'},max:100},x:{grid:{display:false}}}}});
+
+// Vertical heatmap
+if(D.vert_heatmap){
+  const vmVerts = Object.keys(D.vert_heatmap);
+  const vmFeats = Object.keys(D.vert_heatmap[vmVerts[0]]||{});
+  new Chart(document.getElementById('heatmapChart'),{type:'bar',data:{labels:vmFeats,datasets:vmVerts.map((v,i)=>({label:v,data:vmFeats.map(f=>(D.vert_heatmap[v]||{})[f]||0),backgroundColor:PAL[i%PAL.length],borderRadius:2}))},options:{plugins:{legend:{display:true,position:'top',labels:{font:{size:9}}}},scales:{y:{grid:{color:'#f0f0f0'},title:{display:true,text:'% of onboarded',color:'#9ca3af'}},x:{grid:{display:false},ticks:{font:{size:9}}}}}});
+}
+
+// ═══════════════════════════════════════════════════════════
+// NAV SCROLL LOGIC
+// ═══════════════════════════════════════════════════════════
+(function(){
+  const navEl = document.getElementById('navScroll');
+  const fadeL = document.getElementById('navFadeL');
+  const fadeR = document.getElementById('navFadeR');
+  const arrL = document.getElementById('navL');
+  const arrR = document.getElementById('navR');
+  function updateNav(){
+    const sl=navEl.scrollLeft,sw=navEl.scrollWidth,cw=navEl.clientWidth;
+    fadeL.style.opacity=sl>10?'1':'0';
+    arrL.style.opacity=sl>10?'1':'0';
+    fadeR.style.opacity=sl<sw-cw-10?'1':'0';
+    arrR.style.opacity=sl<sw-cw-10?'1':'0';
+  }
+  navEl.addEventListener('scroll',updateNav);
+  updateNav();
+
+  // Active nav highlighting
+  const links = navEl.querySelectorAll('a');
+  const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        links.forEach(l=>l.classList.remove('active'));
+        const link = navEl.querySelector(`a[data-sec="${e.target.id}"]`);
+        if(link) link.classList.add('active');
+      }
+    });
+  },{rootMargin:'-20% 0px -70% 0px'});
+  document.querySelectorAll('.section').forEach(s=>observer.observe(s));
+})();
+</script>
+</body></html>

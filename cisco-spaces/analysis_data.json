@@ -1,0 +1,1696 @@
+{
+  "kpis": {
+    "total": 20462,
+    "onboarded": 7270,
+    "onboarded_pct": 35.5,
+    "loc_active": 5445,
+    "loc_active_pct": 74.9,
+    "any_feature": 1584,
+    "any_feature_pct": 21.8,
+    "deep": 169,
+    "deep_pct": 2.3,
+    "power_users": 34,
+    "avg_engagement": 9.9,
+    "median_engagement": 8.0,
+    "partner_accounts": 262,
+    "with_sensors": 214
+  },
+  "tiers": {
+    "See": {
+      "total": 12,
+      "onboarded": 0,
+      "onboarded_pct": 0.0,
+      "any_feature": 0,
+      "any_feature_pct": 0,
+      "loc_active_pct": 0,
+      "deep_pct": 0,
+      "avg_engagement": 0,
+      "paid_pct": 25.0
+    },
+    "Essentials": {
+      "total": 11263,
+      "onboarded": 3773,
+      "onboarded_pct": 33.5,
+      "any_feature": 568,
+      "any_feature_pct": 15.1,
+      "loc_active_pct": 73.0,
+      "deep_pct": 0.8,
+      "avg_engagement": 7.9,
+      "paid_pct": 11.4
+    },
+    "Advantage": {
+      "total": 3564,
+      "onboarded": 1924,
+      "onboarded_pct": 54.0,
+      "any_feature": 828,
+      "any_feature_pct": 43.0,
+      "loc_active_pct": 71.7,
+      "deep_pct": 6.3,
+      "avg_engagement": 15.5,
+      "paid_pct": 41.2
+    },
+    "Premier": {
+      "total": 74,
+      "onboarded": 53,
+      "onboarded_pct": 71.6,
+      "any_feature": 41,
+      "any_feature_pct": 77.4,
+      "loc_active_pct": 96.2,
+      "deep_pct": 24.5,
+      "avg_engagement": 26.7,
+      "paid_pct": 95.9
+    },
+    "Unknown": {
+      "total": 5549,
+      "onboarded": 1520,
+      "onboarded_pct": 27.4,
+      "any_feature": 147,
+      "any_feature_pct": 9.7,
+      "loc_active_pct": 82.8,
+      "deep_pct": 0.3,
+      "avg_engagement": 7.4,
+      "paid_pct": 7.1
+    }
+  },
+  "funnel": {
+    "Onboarded Only": 1618,
+    "Maps Only": 8,
+    "Location Active": 4026,
+    "Location + Maps": 34,
+    "Feature Active": 1274,
+    "Multi-Feature": 170,
+    "Deep Adoption": 106,
+    "Power User": 34
+  },
+  "funnel_tier": {
+    "Essentials": {
+      "Onboarded Only": 950,
+      "Maps Only": 0,
+      "Location Active": 2250,
+      "Location + Maps": 5,
+      "Feature Active": 505,
+      "Multi-Feature": 37,
+      "Deep Adoption": 23,
+      "Power User": 3
+    },
+    "Advantage": {
+      "Onboarded Only": 427,
+      "Maps Only": 8,
+      "Location Active": 633,
+      "Location + Maps": 28,
+      "Feature Active": 615,
+      "Multi-Feature": 115,
+      "Deep Adoption": 73,
+      "Power User": 25
+    },
+    "Premier": {
+      "Onboarded Only": 2,
+      "Maps Only": 0,
+      "Location Active": 10,
+      "Location + Maps": 0,
+      "Feature Active": 18,
+      "Multi-Feature": 12,
+      "Deep Adoption": 7,
+      "Power User": 4
+    }
+  },
+  "features": {
+    "Dashboard Login": {
+      "count": 1752,
+      "pct_total": 8.6,
+      "pct_onb": 24.1
+    },
+    "Open Roaming": {
+      "count": 19,
+      "pct_total": 0.1,
+      "pct_onb": 0.3
+    },
+    "Captive Portal": {
+      "count": 50,
+      "pct_total": 0.2,
+      "pct_onb": 0.7
+    },
+    "Detect & Locate API": {
+      "count": 179,
+      "pct_total": 0.9,
+      "pct_onb": 2.5
+    },
+    "Firehose API": {
+      "count": 179,
+      "pct_total": 0.9,
+      "pct_onb": 2.5
+    },
+    "SFTP Export": {
+      "count": 94,
+      "pct_total": 0.5,
+      "pct_onb": 1.3
+    },
+    "Signage App": {
+      "count": 107,
+      "pct_total": 0.5,
+      "pct_onb": 1.5
+    },
+    "Space Explorer": {
+      "count": 5,
+      "pct_total": 0.0,
+      "pct_onb": 0.1
+    },
+    "Partner Apps": {
+      "count": 234,
+      "pct_total": 1.1,
+      "pct_onb": 3.2
+    },
+    "AI Maps": {
+      "count": 323,
+      "pct_total": 1.6,
+      "pct_onb": 4.4
+    },
+    "IoT Explorer": {
+      "count": 65,
+      "pct_total": 0.3,
+      "pct_onb": 0.9
+    },
+    "IoT Wired": {
+      "count": 30,
+      "pct_total": 0.1,
+      "pct_onb": 0.4
+    }
+  },
+  "feature_depth": {
+    "0": 5686,
+    "1": 1265,
+    "2": 150,
+    "3": 91,
+    "4": 42,
+    "5": 23,
+    "6": 9,
+    "7": 3,
+    "8": 1
+  },
+  "features_tier": {
+    "Essentials": {
+      "Dashboard Login": 13.3,
+      "Open Roaming": 0.1,
+      "Captive Portal": 0.1,
+      "Detect & Locate API": 1.0,
+      "Firehose API": 0.8,
+      "SFTP Export": 0.2,
+      "Signage App": 0.1,
+      "Space Explorer": 0.0,
+      "Partner Apps": 1.4,
+      "AI Maps": 0.7,
+      "IoT Explorer": 0.0,
+      "IoT Wired": 0.2
+    },
+    "Advantage": {
+      "Dashboard Login": 35.9,
+      "Open Roaming": 0.3,
+      "Captive Portal": 1.8,
+      "Detect & Locate API": 5.2,
+      "Firehose API": 5.5,
+      "SFTP Export": 3.2,
+      "Signage App": 2.1,
+      "Space Explorer": 0.0,
+      "Partner Apps": 5.9,
+      "AI Maps": 5.8,
+      "IoT Explorer": 0.1,
+      "IoT Wired": 0.2
+    },
+    "Premier": {
+      "Dashboard Login": 67.9,
+      "Open Roaming": 3.8,
+      "Captive Portal": 3.8,
+      "Detect & Locate API": 7.5,
+      "Firehose API": 13.2,
+      "SFTP Export": 5.7,
+      "Signage App": 24.5,
+      "Space Explorer": 0.0,
+      "Partner Apps": 9.4,
+      "AI Maps": 39.6,
+      "IoT Explorer": 0.0,
+      "IoT Wired": 0.0
+    }
+  },
+  "cooccurrence": {
+    "Dashboard Login + AI Maps": 159,
+    "Firehose API + Partner Apps": 134,
+    "Dashboard Login + Partner Apps": 121,
+    "Dashboard Login + Firehose API": 106,
+    "Signage App + AI Maps": 103,
+    "Dashboard Login + Detect & Locate API": 92,
+    "Detect & Locate API + Firehose API": 73,
+    "Detect & Locate API + Partner Apps": 73,
+    "Partner Apps + AI Maps": 69,
+    "Firehose API + AI Maps": 61,
+    "Dashboard Login + Signage App": 58,
+    "Detect & Locate API + AI Maps": 49,
+    "Dashboard Login + SFTP Export": 45,
+    "AI Maps + IoT Explorer": 34,
+    "Signage App + Partner Apps": 30
+  },
+  "correlations": [
+    {
+      "pair": "middleware count \u00d7 feature count",
+      "r": 0.81,
+      "target": "feature_count"
+    },
+    {
+      "pair": "outcomes count \u00d7 feature count",
+      "r": 0.68,
+      "target": "feature_count"
+    },
+    {
+      "pair": "connector \u00d7 engagement",
+      "r": 0.65,
+      "target": "engagement"
+    },
+    {
+      "pair": "maps configured \u00d7 engagement",
+      "r": 0.61,
+      "target": "engagement"
+    },
+    {
+      "pair": "sensors \u00d7 engagement",
+      "r": 0.6,
+      "target": "engagement"
+    },
+    {
+      "pair": "partner \u00d7 engagement",
+      "r": 0.59,
+      "target": "engagement"
+    },
+    {
+      "pair": "advanced gw \u00d7 engagement",
+      "r": 0.58,
+      "target": "engagement"
+    },
+    {
+      "pair": "api keys \u00d7 engagement",
+      "r": 0.57,
+      "target": "engagement"
+    },
+    {
+      "pair": "middleware count \u00d7 engagement",
+      "r": 0.53,
+      "target": "engagement"
+    },
+    {
+      "pair": "loc active \u00d7 engagement",
+      "r": 0.5,
+      "target": "engagement"
+    },
+    {
+      "pair": "outcomes count \u00d7 engagement",
+      "r": 0.44,
+      "target": "engagement"
+    },
+    {
+      "pair": "signage \u00d7 engagement",
+      "r": 0.41,
+      "target": "engagement"
+    },
+    {
+      "pair": "connector \u00d7 feature count",
+      "r": 0.39,
+      "target": "feature_count"
+    },
+    {
+      "pair": "api keys \u00d7 feature count",
+      "r": 0.37,
+      "target": "feature_count"
+    },
+    {
+      "pair": "partner \u00d7 feature count",
+      "r": 0.36,
+      "target": "feature_count"
+    },
+    {
+      "pair": "transmit \u00d7 engagement",
+      "r": 0.36,
+      "target": "engagement"
+    },
+    {
+      "pair": "signage \u00d7 feature count",
+      "r": 0.35,
+      "target": "feature_count"
+    },
+    {
+      "pair": "advanced gw \u00d7 feature count",
+      "r": 0.35,
+      "target": "feature_count"
+    },
+    {
+      "pair": "maps configured \u00d7 feature count",
+      "r": 0.33,
+      "target": "feature_count"
+    },
+    {
+      "pair": "sensors \u00d7 feature count",
+      "r": 0.33,
+      "target": "feature_count"
+    }
+  ],
+  "maps_impact": {
+    "with": {
+      "n": 211,
+      "avg_feat": 1.67,
+      "avg_eng": 42.7,
+      "any_feat_pct": 80.1
+    },
+    "without": {
+      "n": 7059,
+      "avg_feat": 0.26,
+      "avg_eng": 8.9,
+      "any_feat_pct": 20.0
+    }
+  },
+  "sensors_impact": {
+    "with": {
+      "n": 182,
+      "avg_feat": 1.78,
+      "avg_eng": 44.6,
+      "any_feat_pct": 80.8
+    },
+    "without": {
+      "n": 7088,
+      "avg_feat": 0.27,
+      "avg_eng": 9.0,
+      "any_feat_pct": 20.3
+    }
+  },
+  "connector_impact": {
+    "with": {
+      "n": 1670,
+      "avg_feat": 0.81,
+      "avg_eng": 20.9,
+      "any_feat_pct": 52.8
+    },
+    "without": {
+      "n": 5600,
+      "avg_feat": 0.15,
+      "avg_eng": 6.6,
+      "any_feat_pct": 12.6
+    }
+  },
+  "adv_gw_impact": {
+    "with": {
+      "n": 163,
+      "avg_feat": 1.96,
+      "avg_eng": 45.5,
+      "any_feat_pct": 83.4
+    },
+    "without": {
+      "n": 7107,
+      "avg_feat": 0.27,
+      "avg_eng": 9.1,
+      "any_feat_pct": 20.4
+    }
+  },
+  "ap_density": {
+    "(0.999, 33.0]": {
+      "n": 789,
+      "avg_feat": 0.32,
+      "avg_eng": 11.2,
+      "any_feat_pct": 20.2
+    },
+    "(33.0, 217.0]": {
+      "n": 786,
+      "avg_feat": 0.37,
+      "avg_eng": 12.8,
+      "any_feat_pct": 24.9
+    },
+    "(217.0, 941.0]": {
+      "n": 790,
+      "avg_feat": 0.57,
+      "avg_eng": 16.3,
+      "any_feat_pct": 40.0
+    },
+    "(941.0, 275826.0]": {
+      "n": 784,
+      "avg_feat": 0.96,
+      "avg_eng": 22.0,
+      "any_feat_pct": 61.0
+    }
+  },
+  "sensor_pipeline": {
+    "accounts_with_discovery": 165,
+    "total_discovered": 3687019,
+    "total_claimed": 174057,
+    "total_configured": 75416,
+    "total_sending": 114,
+    "discover_to_claim_pct": 4.7,
+    "claim_to_config_pct": 43.3,
+    "avg_discovered": 22345.6,
+    "avg_claimed": 1054.9
+  },
+  "signage": {
+    "total": 380,
+    "avg_devices": 5.6,
+    "avg_clicks": 143.2,
+    "avg_events": 5.7,
+    "with_webex": 307,
+    "with_rich_map": 380,
+    "avg_webex_devices": 171.9,
+    "top_events": {
+      "room_finder": 2164,
+      "floor_select": 27848,
+      "where_am_i": 1524
+    }
+  },
+  "partners": {
+    "total": 262,
+    "categories": {
+      "Healthcare RTLS": 91,
+      "Kio Cloud (Wayfinding)": 90,
+      "Indoor Mapping": 36,
+      "Other": 13,
+      "Test/Dev": 8,
+      "Environmental": 7,
+      "Smart Building": 6,
+      "Asset Management": 5,
+      "Workplace": 4,
+      "Airport Solutions": 2
+    },
+    "top_apps": {
+      "STANLEY Healthcare RTLS": 60,
+      "Kio Cloud": 49,
+      "Kio Cloud UK": 31,
+      "MazeMap": 28,
+      "CenTrak - Locating and Sensing Services": 21,
+      "Kio Cloud EU": 9,
+      "MapsIndoors": 5,
+      "Appspace for Cisco Spaces": 4,
+      "Sonitor Sense On-Prem": 4,
+      "HibouAir Lite": 3,
+      "Asimily": 3,
+      "PlaceOS On-Prem": 3,
+      "Live Monitoring": 2,
+      "Bluzone for Healthcare RTLS": 2,
+      "BORDA ASSET MANAGEMENT (CMMS & RTLS)": 2
+    },
+    "by_category": {
+      "Kio Cloud (Wayfinding)": {
+        "n": 90,
+        "avg_feat": 2.17,
+        "avg_eng": 45.8
+      },
+      "Smart Building": {
+        "n": 6,
+        "avg_feat": 2.33,
+        "avg_eng": 41.3
+      },
+      "Environmental": {
+        "n": 7,
+        "avg_feat": 2.71,
+        "avg_eng": 49.1
+      },
+      "Indoor Mapping": {
+        "n": 36,
+        "avg_feat": 1.72,
+        "avg_eng": 38.4
+      },
+      "Healthcare RTLS": {
+        "n": 91,
+        "avg_feat": 1.15,
+        "avg_eng": 34.3
+      },
+      "Workplace": {
+        "n": 4,
+        "avg_feat": 1.25,
+        "avg_eng": 24.5
+      },
+      "Test/Dev": {
+        "n": 8,
+        "avg_feat": 1.5,
+        "avg_eng": 28.1
+      },
+      "Asset Management": {
+        "n": 5,
+        "avg_feat": 2.8,
+        "avg_eng": 38.2
+      },
+      "Other": {
+        "n": 13,
+        "avg_feat": 2.15,
+        "avg_eng": 38.5
+      },
+      "Airport Solutions": {
+        "n": 2,
+        "avg_feat": 4.5,
+        "avg_eng": 62.0
+      }
+    },
+    "firehose_apps": 25
+  },
+  "use_cases": {
+    "total_accounts": 297,
+    "avg_per_account": 4.0,
+    "asset_tracking": 203,
+    "temperature": 138,
+    "presence": 99,
+    "with_rules": 105,
+    "avg_rules": 1.2
+  },
+  "stall_points": {
+    "Network Onboarded": {
+      "n": 6419,
+      "any_feature_pct": 20.5,
+      "loc_active_pct": 77.8,
+      "avg_engagement": 9.6,
+      "maps_pct": 2.3
+    },
+    "Report Started": {
+      "n": 1,
+      "any_feature_pct": 0.0,
+      "loc_active_pct": 100.0,
+      "avg_engagement": 14.0,
+      "maps_pct": 0.0
+    },
+    "Setup Complete - Business units defined": {
+      "n": 546,
+      "any_feature_pct": 33.7,
+      "loc_active_pct": 53.5,
+      "avg_engagement": 13.3,
+      "maps_pct": 8.4
+    },
+    "Setup Complete - Full Metadata Updated": {
+      "n": 23,
+      "any_feature_pct": 47.8,
+      "loc_active_pct": 60.9,
+      "avg_engagement": 15.2,
+      "maps_pct": 0.0
+    },
+    "Setup Complete - Sq. ft. Updated": {
+      "n": 9,
+      "any_feature_pct": 66.7,
+      "loc_active_pct": 55.6,
+      "avg_engagement": 24.8,
+      "maps_pct": 22.2
+    },
+    "Setup Complete - Timezone Updated": {
+      "n": 272,
+      "any_feature_pct": 25.7,
+      "loc_active_pct": 51.1,
+      "avg_engagement": 10.9,
+      "maps_pct": 5.1
+    }
+  },
+  "regions": {
+    "Americas": {
+      "total": 8119,
+      "onboarded": 3539,
+      "onboarded_pct": 43.6,
+      "any_feature_pct": 19.7,
+      "loc_active_pct": 75.8,
+      "avg_engagement": 9.8,
+      "avg_features": 0.2,
+      "tier_mix": {
+        "Essentials": 5219,
+        "Advantage": 1753,
+        "Unknown": 1113,
+        "Premier": 31,
+        "See": 3
+      }
+    },
+    "EMEAR": {
+      "total": 6473,
+      "onboarded": 2403,
+      "onboarded_pct": 37.1,
+      "any_feature_pct": 28.8,
+      "loc_active_pct": 73.6,
+      "avg_engagement": 10.9,
+      "avg_features": 0.53,
+      "tier_mix": {
+        "Essentials": 4284,
+        "Advantage": 1309,
+        "Unknown": 841,
+        "Premier": 33,
+        "See": 6
+      }
+    },
+    "APJC": {
+      "total": 2332,
+      "onboarded": 551,
+      "onboarded_pct": 23.6,
+      "any_feature_pct": 20.9,
+      "loc_active_pct": 55.2,
+      "avg_engagement": 10.1,
+      "avg_features": 0.24,
+      "tier_mix": {
+        "Essentials": 1490,
+        "Advantage": 468,
+        "Unknown": 362,
+        "Premier": 9,
+        "See": 3
+      }
+    }
+  },
+  "verticals": {
+    "Generic": {
+      "total": 1555,
+      "onboarded": 1224,
+      "any_feature": 272,
+      "any_feature_pct": 22.2,
+      "avg_features": 0.36,
+      "avg_engagement": 12.6,
+      "deep_pct": 3.6,
+      "loc_active_pct": 95.0,
+      "has_partner_pct": 3.9
+    },
+    "Workspaces": {
+      "total": 777,
+      "onboarded": 671,
+      "any_feature": 329,
+      "any_feature_pct": 49.0,
+      "avg_features": 0.76,
+      "avg_engagement": 18.5,
+      "deep_pct": 7.9,
+      "loc_active_pct": 88.7,
+      "has_partner_pct": 7.6
+    },
+    "Healthcare": {
+      "total": 361,
+      "onboarded": 348,
+      "any_feature": 211,
+      "any_feature_pct": 60.6,
+      "avg_features": 0.87,
+      "avg_engagement": 21.7,
+      "deep_pct": 7.5,
+      "loc_active_pct": 97.1,
+      "has_partner_pct": 24.4
+    },
+    "Education": {
+      "total": 316,
+      "onboarded": 299,
+      "any_feature": 125,
+      "any_feature_pct": 41.8,
+      "avg_features": 0.62,
+      "avg_engagement": 18.2,
+      "deep_pct": 5.0,
+      "loc_active_pct": 93.6,
+      "has_partner_pct": 9.2
+    },
+    "Retail": {
+      "total": 155,
+      "onboarded": 115,
+      "any_feature": 50,
+      "any_feature_pct": 43.5,
+      "avg_features": 0.65,
+      "avg_engagement": 16.0,
+      "deep_pct": 6.1,
+      "loc_active_pct": 81.7,
+      "has_partner_pct": 0.6
+    },
+    "Manufacturing": {
+      "total": 96,
+      "onboarded": 91,
+      "any_feature": 27,
+      "any_feature_pct": 29.7,
+      "avg_features": 0.4,
+      "avg_engagement": 13.3,
+      "deep_pct": 3.3,
+      "loc_active_pct": 87.9,
+      "has_partner_pct": 2.1
+    },
+    "Government": {
+      "total": 88,
+      "onboarded": 80,
+      "any_feature": 25,
+      "any_feature_pct": 31.2,
+      "avg_features": 0.39,
+      "avg_engagement": 13.8,
+      "deep_pct": 2.5,
+      "loc_active_pct": 97.5,
+      "has_partner_pct": 0.0
+    },
+    "Technology": {
+      "total": 66,
+      "onboarded": 56,
+      "any_feature": 26,
+      "any_feature_pct": 46.4,
+      "avg_features": 0.68,
+      "avg_engagement": 15.5,
+      "deep_pct": 5.4,
+      "loc_active_pct": 91.1,
+      "has_partner_pct": 1.5
+    },
+    "Banking & Financial Services": {
+      "total": 64,
+      "onboarded": 57,
+      "any_feature": 15,
+      "any_feature_pct": 26.3,
+      "avg_features": 0.35,
+      "avg_engagement": 12.4,
+      "deep_pct": 3.5,
+      "loc_active_pct": 91.2,
+      "has_partner_pct": 0.0
+    },
+    "Hospitality": {
+      "total": 40,
+      "onboarded": 35,
+      "any_feature": 16,
+      "any_feature_pct": 45.7,
+      "avg_features": 0.69,
+      "avg_engagement": 16.7,
+      "deep_pct": 8.6,
+      "loc_active_pct": 94.3,
+      "has_partner_pct": 2.5
+    },
+    "Venue": {
+      "total": 6,
+      "onboarded": 5,
+      "any_feature": 3,
+      "any_feature_pct": 60.0,
+      "avg_features": 1.6,
+      "avg_engagement": 21.6,
+      "deep_pct": 20.0,
+      "loc_active_pct": 60.0,
+      "has_partner_pct": 0.0
+    }
+  },
+  "vert_heatmap": {
+    "Generic": {
+      "Dashboard Login": 17.8,
+      "Open Roaming": 0.3,
+      "Captive Portal": 1.5,
+      "Detect & Locate API": 2.5,
+      "Firehose API": 3.5,
+      "SFTP Export": 2.0,
+      "Signage App": 1.6,
+      "Space Explorer": 0.0,
+      "Partner Apps": 3.3,
+      "AI Maps": 3.2,
+      "IoT Explorer": 0.1,
+      "IoT Wired": 0.2
+    },
+    "Workspaces": {
+      "Dashboard Login": 41.6,
+      "Open Roaming": 0.1,
+      "Captive Portal": 0.7,
+      "Detect & Locate API": 6.1,
+      "Firehose API": 5.4,
+      "SFTP Export": 2.1,
+      "Signage App": 3.9,
+      "Space Explorer": 0.0,
+      "Partner Apps": 6.3,
+      "AI Maps": 9.8,
+      "IoT Explorer": 0.0,
+      "IoT Wired": 0.4
+    },
+    "Healthcare": {
+      "Dashboard Login": 55.5,
+      "Open Roaming": 0.0,
+      "Captive Portal": 0.0,
+      "Detect & Locate API": 4.6,
+      "Firehose API": 9.5,
+      "SFTP Export": 0.6,
+      "Signage App": 0.6,
+      "Space Explorer": 0.0,
+      "Partner Apps": 13.2,
+      "AI Maps": 2.9,
+      "IoT Explorer": 0.0,
+      "IoT Wired": 0.0
+    },
+    "Education": {
+      "Dashboard Login": 36.8,
+      "Open Roaming": 0.3,
+      "Captive Portal": 0.0,
+      "Detect & Locate API": 4.7,
+      "Firehose API": 5.0,
+      "SFTP Export": 3.3,
+      "Signage App": 1.0,
+      "Space Explorer": 0.0,
+      "Partner Apps": 5.0,
+      "AI Maps": 5.7,
+      "IoT Explorer": 0.0,
+      "IoT Wired": 0.3
+    },
+    "Retail": {
+      "Dashboard Login": 34.8,
+      "Open Roaming": 0.9,
+      "Captive Portal": 4.3,
+      "Detect & Locate API": 2.6,
+      "Firehose API": 5.2,
+      "SFTP Export": 4.3,
+      "Signage App": 1.7,
+      "Space Explorer": 0.0,
+      "Partner Apps": 1.7,
+      "AI Maps": 9.6,
+      "IoT Explorer": 0.0,
+      "IoT Wired": 0.0
+    },
+    "Manufacturing": {
+      "Dashboard Login": 29.7,
+      "Open Roaming": 0.0,
+      "Captive Portal": 0.0,
+      "Detect & Locate API": 1.1,
+      "Firehose API": 2.2,
+      "SFTP Export": 0.0,
+      "Signage App": 2.2,
+      "Space Explorer": 0.0,
+      "Partner Apps": 1.1,
+      "AI Maps": 3.3,
+      "IoT Explorer": 0.0,
+      "IoT Wired": 0.0
+    },
+    "Government": {
+      "Dashboard Login": 28.7,
+      "Open Roaming": 0.0,
+      "Captive Portal": 1.2,
+      "Detect & Locate API": 1.2,
+      "Firehose API": 1.2,
+      "SFTP Export": 1.2,
+      "Signage App": 0.0,
+      "Space Explorer": 0.0,
+      "Partner Apps": 1.2,
+      "AI Maps": 3.8,
+      "IoT Explorer": 0.0,
+      "IoT Wired": 0.0
+    },
+    "Technology": {
+      "Dashboard Login": 35.7,
+      "Open Roaming": 0.0,
+      "Captive Portal": 0.0,
+      "Detect & Locate API": 3.6,
+      "Firehose API": 7.1,
+      "SFTP Export": 0.0,
+      "Signage App": 7.1,
+      "Space Explorer": 0.0,
+      "Partner Apps": 3.6,
+      "AI Maps": 10.7,
+      "IoT Explorer": 0.0,
+      "IoT Wired": 0.0
+    }
+  },
+  "advantage": {
+    "total": 3564,
+    "onboarded": 1924,
+    "dark": 1096,
+    "dark_pct": 57.0,
+    "active": 828,
+    "middleware": {
+      "Open Roaming": {
+        "n": 5,
+        "pct": 0.3
+      },
+      "Captive Portal": {
+        "n": 35,
+        "pct": 1.8
+      },
+      "AI Maps": {
+        "n": 111,
+        "pct": 5.8
+      },
+      "IoT Explorer": {
+        "n": 2,
+        "pct": 0.1
+      },
+      "IoT Wired": {
+        "n": 4,
+        "pct": 0.2
+      },
+      "Detect & Locate API": {
+        "n": 101,
+        "pct": 5.2
+      },
+      "Firehose API": {
+        "n": 106,
+        "pct": 5.5
+      }
+    },
+    "outcomes": {
+      "Space Explorer": {
+        "n": 0,
+        "pct": 0.0
+      },
+      "Signage App": {
+        "n": 41,
+        "pct": 2.1
+      },
+      "Partner Apps": {
+        "n": 113,
+        "pct": 5.9
+      },
+      "Dashboard Login": {
+        "n": 690,
+        "pct": 35.9
+      },
+      "SFTP Export": {
+        "n": 61,
+        "pct": 3.2
+      }
+    },
+    "avg_engagement": 15.5,
+    "top_accounts": [
+      {
+        "company_name": "Flint SI",
+        "engagement": 79,
+        "feature_count": 7,
+        "vertical": "Workspaces",
+        "region": "EMEAR",
+        "adoption_level": "Power User",
+        "churn_risk": "Healthy",
+        "tier_ordinal": 3,
+        "aps_onboarded": 13.0
+      },
+      {
+        "company_name": "RAI Amsterdam",
+        "engagement": 75,
+        "feature_count": 7,
+        "vertical": "Generic",
+        "region": "EMEAR",
+        "adoption_level": "Power User",
+        "churn_risk": "Healthy",
+        "tier_ordinal": 3,
+        "aps_onboarded": 684.0
+      },
+      {
+        "company_name": "Coventry University",
+        "engagement": 74,
+        "feature_count": 8,
+        "vertical": "Education",
+        "region": "EMEAR",
+        "adoption_level": "Power User",
+        "churn_risk": "Healthy",
+        "tier_ordinal": 3,
+        "aps_onboarded": 1648.0
+      },
+      {
+        "company_name": "Schiphol Telematics",
+        "engagement": 74,
+        "feature_count": 6,
+        "vertical": "Transportation",
+        "region": "EMEAR",
+        "adoption_level": "Power User",
+        "churn_risk": "Healthy",
+        "tier_ordinal": 3,
+        "aps_onboarded": 1316.0
+      },
+      {
+        "company_name": "KAUST",
+        "engagement": 70,
+        "feature_count": 5,
+        "vertical": "Education",
+        "region": "EMEAR",
+        "adoption_level": "Power User",
+        "churn_risk": "Healthy",
+        "tier_ordinal": 3,
+        "aps_onboarded": 1114.0
+      },
+      {
+        "company_name": "LLOYDS BANKING GROUP LBG",
+        "engagement": 69,
+        "feature_count": 6,
+        "vertical": "Workspaces",
+        "region": "APJC",
+        "adoption_level": "Power User",
+        "churn_risk": "Healthy",
+        "tier_ordinal": 3,
+        "aps_onboarded": 4335.0
+      },
+      {
+        "company_name": "AnyWeb AG",
+        "engagement": 66,
+        "feature_count": 6,
+        "vertical": "Generic",
+        "region": "EMEAR",
+        "adoption_level": "Power User",
+        "churn_risk": "Healthy",
+        "tier_ordinal": 3,
+        "aps_onboarded": 8.0
+      },
+      {
+        "company_name": "Milton Keynes University Hospital NHS Foundation Trust",
+        "engagement": 65,
+        "feature_count": 5,
+        "vertical": "Healthcare",
+        "region": "EMEAR",
+        "adoption_level": "Power User",
+        "churn_risk": "Healthy",
+        "tier_ordinal": 3,
+        "aps_onboarded": 582.0
+      },
+      {
+        "company_name": "International Convention Centre Sydney",
+        "engagement": 65,
+        "feature_count": 1,
+        "vertical": "Generic",
+        "region": "Americas",
+        "adoption_level": "Feature Active",
+        "churn_risk": "Healthy",
+        "tier_ordinal": 3,
+        "aps_onboarded": 935.0
+      },
+      {
+        "company_name": "UCF",
+        "engagement": 64,
+        "feature_count": 1,
+        "vertical": "Education",
+        "region": "Americas",
+        "adoption_level": "Feature Active",
+        "churn_risk": "Healthy",
+        "tier_ordinal": 3,
+        "aps_onboarded": 5538.0
+      },
+      {
+        "company_name": "UCB",
+        "engagement": 63,
+        "feature_count": 5,
+        "vertical": "Workspaces",
+        "region": "EMEAR",
+        "adoption_level": "Power User",
+        "churn_risk": "Healthy",
+        "tier_ordinal": 3,
+        "aps_onboarded": 2367.0
+      },
+      {
+        "company_name": "FORD-WERKE GMBH",
+        "engagement": 63,
+        "feature_count": 1,
+        "vertical": "Workspaces",
+        "region": "Americas",
+        "adoption_level": "Feature Active",
+        "churn_risk": "Healthy",
+        "tier_ordinal": 3,
+        "aps_onboarded": 18083.0
+      },
+      {
+        "company_name": "Indiana University Health",
+        "engagement": 63,
+        "feature_count": 1,
+        "vertical": "Healthcare",
+        "region": "APJC",
+        "adoption_level": "Feature Active",
+        "churn_risk": "Healthy",
+        "tier_ordinal": 3,
+        "aps_onboarded": 11197.0
+      },
+      {
+        "company_name": "NEW YORK CITY HEALTH AND HOSPITALS CORP",
+        "engagement": 63,
+        "feature_count": 1,
+        "vertical": "Healthcare",
+        "region": "Americas",
+        "adoption_level": "Feature Active",
+        "churn_risk": "Healthy",
+        "tier_ordinal": 3,
+        "aps_onboarded": 19309.0
+      },
+      {
+        "company_name": "UNIVERSITY OF KENTUCKY",
+        "engagement": 62,
+        "feature_count": 1,
+        "vertical": "Education",
+        "region": "Americas",
+        "adoption_level": "Feature Active",
+        "churn_risk": "Healthy",
+        "tier_ordinal": 3,
+        "aps_onboarded": 12407.0
+      },
+      {
+        "company_name": "Heriot Watt University Dubai",
+        "engagement": 61,
+        "feature_count": 4,
+        "vertical": "Education",
+        "region": "EMEAR",
+        "adoption_level": "Power User",
+        "churn_risk": "Healthy",
+        "tier_ordinal": 3,
+        "aps_onboarded": 212.0
+      },
+      {
+        "company_name": "Intility AS",
+        "engagement": 61,
+        "feature_count": 4,
+        "vertical": "Generic",
+        "region": "EMEAR",
+        "adoption_level": "Power User",
+        "churn_risk": "Healthy",
+        "tier_ordinal": 3,
+        "aps_onboarded": 53.0
+      },
+      {
+        "company_name": "MERCY",
+        "engagement": 60,
+        "feature_count": 1,
+        "vertical": "Generic",
+        "region": "Americas",
+        "adoption_level": "Feature Active",
+        "churn_risk": "Healthy",
+        "tier_ordinal": 3,
+        "aps_onboarded": 9740.0
+      },
+      {
+        "company_name": "NTT Limited",
+        "engagement": 60,
+        "feature_count": 1,
+        "vertical": "N/A",
+        "region": "APJC",
+        "adoption_level": "Feature Active",
+        "churn_risk": "Healthy",
+        "tier_ordinal": 3,
+        "aps_onboarded": 10.0
+      },
+      {
+        "company_name": "UK Research and Innovation",
+        "engagement": 59,
+        "feature_count": 5,
+        "vertical": "Workspaces",
+        "region": "EMEAR",
+        "adoption_level": "Power User",
+        "churn_risk": "Healthy",
+        "tier_ordinal": 3,
+        "aps_onboarded": 17.0
+      }
+    ],
+    "dark_by_region": {
+      "Americas": 601,
+      "EMEAR": 342,
+      "APJC": 147
+    },
+    "dark_by_journey": {
+      "Network Onboarded": 865,
+      "Setup Complete - Business units defined": 142,
+      "Setup Complete - Timezone Updated": 80,
+      "Setup Complete - Full Metadata Updated": 7,
+      "Report Started": 1,
+      "Setup Complete - Sq. ft. Updated": 1
+    },
+    "adoption": {
+      "Location Active": 633,
+      "Feature Active": 615,
+      "Onboarded Only": 427,
+      "Multi-Feature": 115,
+      "Deep Adoption": 73,
+      "Location + Maps": 28,
+      "Power User": 25,
+      "Maps Only": 8
+    },
+    "churn": {
+      "Critical": 1546,
+      "High": 1096,
+      "Medium": 400,
+      "Low": 390,
+      "Healthy": 132
+    }
+  },
+  "churn": {
+    "distribution": {
+      "Critical": 1550,
+      "High": 1108,
+      "Low": 419,
+      "Medium": 414,
+      "Healthy": 147
+    },
+    "total_at_risk": 2658,
+    "at_risk_pct": 73.1
+  },
+  "showcase": [
+    {
+      "company": "Flint SI",
+      "tier": "Advantage",
+      "score": 79,
+      "features": 7,
+      "vertical": "Workspaces",
+      "region": "EMEAR",
+      "adoption": "Power User",
+      "caps": [
+        "Dashboard Login",
+        "Detect & Locate API",
+        "Firehose API",
+        "Signage App",
+        "Partner Apps",
+        "AI Maps",
+        "IoT Wired"
+      ],
+      "extras": [
+        "Sensors",
+        "Signage",
+        "Partner: Kio Cloud UK"
+      ]
+    },
+    {
+      "company": "RAI Amsterdam",
+      "tier": "Advantage",
+      "score": 75,
+      "features": 7,
+      "vertical": "Generic",
+      "region": "EMEAR",
+      "adoption": "Power User",
+      "caps": [
+        "Dashboard Login",
+        "Open Roaming",
+        "Captive Portal",
+        "Firehose API",
+        "SFTP Export",
+        "Partner Apps",
+        "IoT Wired"
+      ],
+      "extras": [
+        "Sensors",
+        "Occupancy",
+        "Partner: MapsIndoors"
+      ]
+    },
+    {
+      "company": "Coventry University",
+      "tier": "Advantage",
+      "score": 74,
+      "features": 8,
+      "vertical": "Education",
+      "region": "EMEAR",
+      "adoption": "Power User",
+      "caps": [
+        "Dashboard Login",
+        "Open Roaming",
+        "Detect & Locate API",
+        "Firehose API",
+        "SFTP Export",
+        "Signage App",
+        "Partner Apps",
+        "AI Maps"
+      ],
+      "extras": [
+        "Sensors",
+        "Signage",
+        "Partner: Kio Cloud UK"
+      ]
+    },
+    {
+      "company": "Schiphol Telematics",
+      "tier": "Advantage",
+      "score": 74,
+      "features": 6,
+      "vertical": "Transportation",
+      "region": "EMEAR",
+      "adoption": "Power User",
+      "caps": [
+        "Dashboard Login",
+        "Open Roaming",
+        "Captive Portal",
+        "Detect & Locate API",
+        "Firehose API",
+        "Partner Apps"
+      ],
+      "extras": [
+        "Sensors",
+        "Partner: Undagrid Smart Airpor"
+      ]
+    },
+    {
+      "company": "Tomas Harglin",
+      "tier": "Unknown",
+      "score": 71,
+      "features": 7,
+      "vertical": "Generic",
+      "region": "EMEAR",
+      "adoption": "Power User",
+      "caps": [
+        "Dashboard Login",
+        "Detect & Locate API",
+        "Firehose API",
+        "Signage App",
+        "Partner Apps",
+        "AI Maps",
+        "IoT Explorer"
+      ],
+      "extras": [
+        "Sensors",
+        "Signage",
+        "Partner: HibouAir Lite"
+      ]
+    },
+    {
+      "company": "KAUST",
+      "tier": "Advantage",
+      "score": 70,
+      "features": 5,
+      "vertical": "Education",
+      "region": "EMEAR",
+      "adoption": "Power User",
+      "caps": [
+        "Detect & Locate API",
+        "Firehose API",
+        "Signage App",
+        "Partner Apps",
+        "AI Maps"
+      ],
+      "extras": [
+        "Sensors",
+        "Signage",
+        "Partner: Selvam_MT_TEST"
+      ]
+    },
+    {
+      "company": "LLOYDS BANKING GROUP LBG",
+      "tier": "Advantage",
+      "score": 69,
+      "features": 6,
+      "vertical": "Workspaces",
+      "region": "APJC",
+      "adoption": "Power User",
+      "caps": [
+        "Dashboard Login",
+        "Firehose API",
+        "SFTP Export",
+        "Signage App",
+        "Partner Apps",
+        "AI Maps"
+      ],
+      "extras": [
+        "Sensors",
+        "Signage",
+        "Partner: Kio Cloud UK"
+      ]
+    },
+    {
+      "company": "ACP IT Solutions LAB",
+      "tier": "Unknown",
+      "score": 68,
+      "features": 6,
+      "vertical": "Generic",
+      "region": "EMEAR",
+      "adoption": "Power User",
+      "caps": [
+        "Dashboard Login",
+        "Detect & Locate API",
+        "Firehose API",
+        "Signage App",
+        "Partner Apps",
+        "AI Maps"
+      ],
+      "extras": [
+        "Sensors",
+        "Signage",
+        "Partner: Kio Cloud EU"
+      ]
+    },
+    {
+      "company": "NTT GERMANY AG & CO. KG",
+      "tier": "Premier",
+      "score": 68,
+      "features": 6,
+      "vertical": "Generic",
+      "region": "APJC",
+      "adoption": "Power User",
+      "caps": [
+        "Dashboard Login",
+        "Detect & Locate API",
+        "Firehose API",
+        "Signage App",
+        "Partner Apps",
+        "AI Maps"
+      ],
+      "extras": [
+        "Sensors",
+        "Signage",
+        "Partner: STANLEY Healthcare RT"
+      ]
+    },
+    {
+      "company": "AnyWeb AG",
+      "tier": "Advantage",
+      "score": 66,
+      "features": 6,
+      "vertical": "Generic",
+      "region": "EMEAR",
+      "adoption": "Power User",
+      "caps": [
+        "Dashboard Login",
+        "Open Roaming",
+        "Detect & Locate API",
+        "Firehose API",
+        "Signage App",
+        "AI Maps"
+      ],
+      "extras": [
+        "Sensors",
+        "Signage",
+        "Partner: AnyTemp_TEST"
+      ]
+    },
+    {
+      "company": "Milton Keynes University Hospital NHS Foundation Trust",
+      "tier": "Advantage",
+      "score": 65,
+      "features": 5,
+      "vertical": "Healthcare",
+      "region": "EMEAR",
+      "adoption": "Power User",
+      "caps": [
+        "Dashboard Login",
+        "Firehose API",
+        "Signage App",
+        "Partner Apps",
+        "AI Maps"
+      ],
+      "extras": [
+        "Sensors",
+        "Signage",
+        "Partner: Kio Cloud UK"
+      ]
+    },
+    {
+      "company": "International Convention Centre Sydney",
+      "tier": "Advantage",
+      "score": 65,
+      "features": 1,
+      "vertical": "Generic",
+      "region": "Americas",
+      "adoption": "Feature Active",
+      "caps": [
+        "Dashboard Login"
+      ],
+      "extras": [
+        "Sensors",
+        "Signage",
+        "Partner: Kio Cloud"
+      ]
+    }
+  ],
+  "timeline": {
+    "months": [
+      "2020-09",
+      "2020-10",
+      "2020-11",
+      "2020-12",
+      "2021-02",
+      "2021-03",
+      "2021-04",
+      "2021-05",
+      "2021-06",
+      "2021-07",
+      "2021-08",
+      "2021-09",
+      "2021-10",
+      "2021-11",
+      "2021-12",
+      "2022-01",
+      "2022-02",
+      "2022-03",
+      "2022-04",
+      "2022-05",
+      "2022-06",
+      "2022-07",
+      "2022-08",
+      "2022-09",
+      "2022-10",
+      "2022-11",
+      "2022-12",
+      "2023-01",
+      "2023-02",
+      "2023-03",
+      "2023-04",
+      "2023-05",
+      "2023-06",
+      "2023-07",
+      "2023-08",
+      "2023-09",
+      "2023-10",
+      "2023-11",
+      "2023-12",
+      "2024-01",
+      "2024-02",
+      "2024-03",
+      "2024-04",
+      "2024-05",
+      "2024-06",
+      "2024-07",
+      "2024-08",
+      "2024-09",
+      "2024-10",
+      "2024-11",
+      "2024-12",
+      "2025-01",
+      "2025-02",
+      "2025-03",
+      "2025-04",
+      "2025-05",
+      "2025-06",
+      "2025-07",
+      "2025-08",
+      "2025-09",
+      "2025-10",
+      "2025-11",
+      "2026-01",
+      "2026-02"
+    ],
+    "accounts": [
+      9,
+      1,
+      1,
+      1,
+      1,
+      3,
+      10,
+      4,
+      2,
+      5,
+      1,
+      2,
+      5,
+      3,
+      3,
+      2,
+      3,
+      8,
+      4,
+      2,
+      3,
+      1,
+      1,
+      8,
+      5,
+      3,
+      2,
+      2,
+      7,
+      3,
+      8,
+      5,
+      5,
+      4,
+      8,
+      6,
+      8,
+      10,
+      3,
+      3,
+      2,
+      3,
+      3,
+      3,
+      4,
+      6,
+      4,
+      2,
+      1,
+      4,
+      3,
+      8,
+      5,
+      5,
+      4,
+      5,
+      4,
+      4,
+      3,
+      4,
+      7,
+      2,
+      2,
+      1
+    ],
+    "avg_eng": [
+      37.9,
+      9.0,
+      21.0,
+      25.0,
+      38.0,
+      54.0,
+      34.2,
+      32.5,
+      43.0,
+      57.2,
+      26.0,
+      66.5,
+      34.4,
+      36.3,
+      28.7,
+      65.5,
+      45.7,
+      44.1,
+      48.5,
+      46.0,
+      24.0,
+      46.0,
+      31.0,
+      38.5,
+      45.8,
+      29.7,
+      16.0,
+      64.5,
+      44.7,
+      32.3,
+      37.5,
+      32.0,
+      57.6,
+      31.5,
+      39.6,
+      31.5,
+      40.0,
+      39.0,
+      42.0,
+      40.3,
+      37.0,
+      29.3,
+      57.0,
+      42.3,
+      48.5,
+      48.2,
+      38.2,
+      56.0,
+      28.0,
+      40.0,
+      49.7,
+      52.8,
+      48.4,
+      40.0,
+      41.8,
+      42.2,
+      51.2,
+      42.8,
+      52.7,
+      32.8,
+      38.6,
+      4.0,
+      52.0,
+      12.0
+    ]
+  },
+  "gaps": {
+    "null_rates": {
+      "vertical": 82.8,
+      "controller_type": 99.4,
+      "aps_onboarded": 81.2,
+      "license_qty": 98.5,
+      "unique_logins_30d": 99.9,
+      "sensors_claimed": 97.4,
+      "use_cases_count": 98.5,
+      "sq_feet": 96.8,
+      "partner_app": 98.7,
+      "connection_type": 91.4
+    },
+    "notes": [
+      "Only 21.8% of onboarded accounts show any feature usage \u2014 5,686 onboarded accounts are feature-dark",
+      "Engagement median is 8.0 out of 100 \u2014 half of onboarded accounts have near-zero measured activity",
+      "Feature usage is binary (Yes/No) \u2014 no frequency, session depth, or recency data available",
+      "No ACV/revenue data \u2014 using license_quantity \u00d7 tier as proxy",
+      "No stakeholder/persona data \u2014 cannot distinguish IT admin from facilities/real estate users",
+      "No NPS/CSAT linked to product telemetry",
+      "16,936 accounts (82.8%) have no vertical classification",
+      "Signage event data exists for only 380 accounts \u2014 rich but narrow",
+      "Sensor pipeline data covers 312 accounts \u2014 small but reveals conversion gaps"
+    ]
+  }
+}
