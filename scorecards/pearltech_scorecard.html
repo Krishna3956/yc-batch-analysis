@@ -91,7 +91,14 @@ body{font-family:'Inter',system-ui,sans-serif;background:#0a0a1a;color:#e2e8f0;l
   .deck-bar{flex-wrap:wrap;gap:8px;padding:10px 14px}
   .deck-bar-text{font-size:0.75rem;text-align:center;width:100%}
   .deck-bar-btn{font-size:0.75rem;padding:7px 14px}
+  .deck-modal{padding:28px 20px;width:94%}
 }
+.deck-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:2000;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
+.deck-overlay.show{display:flex}
+.deck-modal{background:linear-gradient(135deg,#1a1a2e 0%,#2d1b4e 100%);border-radius:16px;padding:36px 32px;max-width:520px;width:90%;text-align:center;position:relative;animation:deckPop 0.3s ease}
+@keyframes deckPop{from{opacity:0;transform:scale(0.9)}to{opacity:1;transform:scale(1)}}
+.deck-modal-close{position:absolute;top:12px;right:16px;background:none;border:none;color:#6b7280;font-size:24px;cursor:pointer;transition:color 0.2s}
+.deck-modal-close:hover{color:#fff}
 </style>
 <script src="https://gumroad.com/js/gumroad.js"></script>
 </head>
@@ -702,6 +709,23 @@ body{font-family:'Inter',system-ui,sans-serif;background:#0a0a1a;color:#e2e8f0;l
 
 </div>
 
+<!-- Pitch Deck Popup Modal -->
+<div class="deck-overlay" id="deckOverlay">
+  <div class="deck-modal">
+    <button class="deck-modal-close" id="deckModalClose">&times;</button>
+    <p style="font-size:0.72rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#ff6600;margin-bottom:10px">Next Step</p>
+    <h2 style="font-size:1.4rem;font-weight:800;color:#fff;margin-bottom:10px">Turn This Scorecard Into a Winning Pitch Deck</h2>
+    <p style="font-size:0.88rem;color:#a5b4c8;line-height:1.7;margin-bottom:16px">We'll take the insights from your report and build you an investor-ready deck - designed to work across YC, Techstars, a16z, Sequoia, and every top VC.</p>
+    <div style="display:flex;justify-content:center;gap:20px;margin-bottom:20px;font-size:0.75rem;color:#64748b">
+      <span>&#10003; 60-min Discovery</span>
+      <span>&#10003; Full Deck Build</span>
+      <span>&#10003; Revision Session</span>
+    </div>
+    <a data-gumroad-overlay-checkout="true" href="https://krishnaatmu.gumroad.com/l/yuryfn" style="display:inline-block;background:#ff6600;color:#fff;padding:12px 36px;border-radius:10px;text-decoration:none;font-size:0.92rem;font-weight:800;transition:background 0.2s;box-shadow:0 4px 20px rgba(255,102,0,0.3)" onmouseover="this.style.background='#e65c00'" onmouseout="this.style.background='#ff6600'">Get Your Pitch Deck - $1,499</a>
+    <p style="font-size:0.68rem;color:#475569;margin-top:12px">One deck for every top program and VC</p>
+  </div>
+</div>
+
 <!-- Sticky Bottom Bar -->
 <div class="deck-bar" id="deckBar">
   <span class="deck-bar-text"><strong>Liked your scorecard?</strong> Let us build your investor pitch deck.</span>
@@ -721,6 +745,32 @@ body{font-family:'Inter',system-ui,sans-serif;background:#0a0a1a;color:#e2e8f0;l
     bar.classList.remove('show');
     bar.classList.add('dismissed');
     sessionStorage.setItem('deck_bar_dismissed','1');
+  });
+
+  // Popup modal - triggers at 35% scroll
+  var overlay=document.getElementById('deckOverlay');
+  var modalClose=document.getElementById('deckModalClose');
+  var popupDismissed=sessionStorage.getItem('deck_popup_dismissed');
+  var popupShown=false;
+  if(!popupDismissed){
+    window.addEventListener('scroll',function(){
+      if(popupShown) return;
+      var scrollPct=window.scrollY/(document.documentElement.scrollHeight-window.innerHeight)*100;
+      if(scrollPct>=35){
+        overlay.classList.add('show');
+        popupShown=true;
+      }
+    });
+  }
+  modalClose.addEventListener('click',function(){
+    overlay.classList.remove('show');
+    sessionStorage.setItem('deck_popup_dismissed','1');
+  });
+  overlay.addEventListener('click',function(e){
+    if(e.target===overlay){
+      overlay.classList.remove('show');
+      sessionStorage.setItem('deck_popup_dismissed','1');
+    }
   });
 })();
 </script>
