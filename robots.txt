@@ -3,4 +3,4 @@ Allow: /
 Disallow: /scorecards/
 Disallow: /pitch-deck/
 
-Sitemap: https://yc-trends.vercel.app/sitemap.xml
+Sitemap: https://yctrends.com/sitemap.xml
