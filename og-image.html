@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 1200px;
+  height: 630px;
+  font-family: 'Inter', system-ui, sans-serif;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #1a1a2e 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+.bg-circle-1 { position: absolute; top: -80px; right: -60px; width: 400px; height: 400px; background: #ff6600; opacity: 0.08; border-radius: 50%; }
+.bg-circle-2 { position: absolute; bottom: -100px; left: -80px; width: 500px; height: 500px; background: #ff6600; opacity: 0.05; border-radius: 50%; }
+.content { text-align: center; max-width: 900px; z-index: 1; }
+.eyebrow { font-size: 16px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: #ff6600; margin-bottom: 20px; }
+h1 { font-size: 64px; font-weight: 800; line-height: 1.1; margin-bottom: 24px; }
+.subtitle { font-size: 22px; color: #94a3b8; line-height: 1.5; margin-bottom: 40px; }
+.stats { display: flex; justify-content: center; gap: 48px; }
+.stat-num { font-size: 42px; font-weight: 800; color: #ff6600; }
+.stat-label { font-size: 13px; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+.footer { position: absolute; bottom: 24px; font-size: 14px; color: #475569; }
+.footer a { color: #ff6600; font-weight: 700; text-decoration: none; }
+</style>
+</head>
+<body>
+  <div class="bg-circle-1"></div>
+  <div class="bg-circle-2"></div>
+  <div class="content">
+    <div class="eyebrow">Y Combinator Batch Analysis</div>
+    <h1>What YC Is Really<br>Betting On</h1>
+    <p class="subtitle">5 batches. 793 companies. 1,625 founders analyzed.</p>
+    <div class="stats">
+      <div><div class="stat-num">793</div><div class="stat-label">Companies</div></div>
+      <div><div class="stat-num">89%</div><div class="stat-label">AI Companies</div></div>
+      <div><div class="stat-num">66%</div><div class="stat-label">B2B</div></div>
+      <div><div class="stat-num">57%</div><div class="stat-label">San Francisco</div></div>
+    </div>
+  </div>
+  <div class="footer">yc-trends.vercel.app &mdash; by <a>Krishna Goyal</a></div>
+</body>
+</html>
