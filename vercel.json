@@ -1,9 +1,1 @@
-{
-  "redirects": [
-    {
-      "source": "/:path*",
-      "destination": "https://howwellyouknow.com/yctrends",
-      "permanent": true
-    }
-  ]
-}
+{}
